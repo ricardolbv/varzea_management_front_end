@@ -4,6 +4,7 @@ import SideMenu from './SideMenu';
 import { Route, Switch } from 'react-router-dom';
 import HomeDisplay from './HomeDisplay';
 import AppBarInside from '../../common/AppBarInside';
+import ProfileBar from './ProfileBar';
 
 
 const HomePage = () => {
@@ -17,7 +18,6 @@ const HomePage = () => {
              <AppBarInside />
              <Switch>
                 <Route path="/home" exact component={HomeDisplay} />
-                
              </Switch>
           </Grid>
         </Grid>

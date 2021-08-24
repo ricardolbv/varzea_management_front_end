@@ -5,9 +5,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import HomeIcon from '@material-ui/icons/Home';
 import ListItemText from '@material-ui/core/ListItemText';
 import PeopleIcon from '@material-ui/icons/People';
-import StorefrontIcon from '@material-ui/icons/Storefront';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
@@ -17,9 +18,6 @@ const useStyle = makeStyles({
        top: '25vh'
     }
 })
-
-
-
 
 function TabOptions(props) {
    const classes = useStyle();
@@ -31,21 +29,25 @@ function TabOptions(props) {
                 <ListItemIcon > <HomeIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Home"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button  name='varejo' id='varejo' onClick= {() => history.push('/home/retail')} >
-                <ListItemIcon > <PeopleIcon style={{ color: "white"}}/>  </ListItemIcon>
-                <ListItemText primary={"Varejo"} style={{ color: "white", width: "auto" }}/>
+            <ListItem button  name='editPerfil' id='editPerfil' onClick= {() => history.push('/home/editProfile')} >
+                <ListItemIcon > <AccountCircleOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
+                <ListItemText primary={"Editar Perfil"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button  name='marca' id='marca' onClick= {() => history.push('/home/brand')}>
-                <ListItemIcon> <StorefrontIcon  style={{ color: "white"}} />  </ListItemIcon>
-                <ListItemText primary={"Marca"} style={{ color: "white", width: "auto" }}/>
+            <ListItem button  name='minhaEquipe' id='minhaEquipe' onClick= {() => history.push('/home/myteam')}>
+                <ListItemIcon> <PeopleIcon  style={{ color: "white"}} />  </ListItemIcon>
+                <ListItemText primary={"Minha Equipe"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button  name='campanha' id='campanha' onClick= {() => history.push('/home/campaign')}>
-                <ListItemIcon> <LocalGroceryStoreIcon  style={{ color: "white"}}/>  </ListItemIcon>
-                <ListItemText primary={"Campanha"} style={{ color: "white", width: "auto" }}/>
+            <ListItem button  name='jogo' id='jogo' onClick= {() => history.push('/home/game')}>
+                <ListItemIcon> <CreateOutlinedIcon  style={{ color: "white"}}/>  </ListItemIcon>
+                <ListItemText primary={"Marcar Jogo"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button name='visualizacao' id='visualizacao' onClick= {() => history.push('/home/visualization')}>
-                <ListItemIcon  > <DashboardIcon style={{ color: "white"}}/>  </ListItemIcon>
-                <ListItemText primary={"Visualização"} style={{ color: "white", width: "auto" }}/>
+            <ListItem button name='resultados' id='resultados' onClick= {() => history.push('/home/results')}>
+                <ListItemIcon  > <AssignmentOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
+                <ListItemText primary={"Resultados"} style={{ color: "white", width: "auto" }}/>
+            </ListItem>
+            <ListItem button name='sair' id='sair' onClick= {() => history.push('/')}>
+                <ListItemIcon  > <ExitToAppOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
+                <ListItemText primary={"Sair"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
         </List>
     )

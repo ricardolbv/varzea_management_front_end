@@ -6,7 +6,7 @@ import TabOptions from './TabOptions';
 
 const SideMenu = () => {
     return (
-        <Grid wrap='wrap' container direction="column" spacing={0} style={{backgroundColor: '#0D0B23', height:'100%'}}>
+        <Grid wrap='wrap' container direction="column" spacing={0} style={{backgroundColor: '#2F303A', height:'100%'}}>
             <Grid item xs={2} >
                <VarzeaInsideLogo />
             </Grid>
