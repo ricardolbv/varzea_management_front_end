@@ -5,14 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormLogin from './FormLogin';
 import Contact from './Contact';
 import SideImage from './SideImage';
-import Box from '@material-ui/core/Box';
-import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
-import Tab from '@material-ui/core/Tab';
 import { useHistory } from 'react-router-dom';
 
 const useStyle = makeStyles({
     Above: {
-        backgroundColor: "#0D0B23",
+        backgroundColor: "#2F303A",
         height: '50vh'
     },
     Under: {
