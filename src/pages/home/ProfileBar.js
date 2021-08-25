@@ -5,13 +5,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useHistory } from 'react-router-dom';
 
 const useStyle = makeStyles(( theme ) => ({
     Root: {
-        position:'absolute',
+        position:'fixed',
         right: '5vh',
+        paddingTop: '1vh'
     },
     Icon: {
         color: "Black",
@@ -48,7 +48,6 @@ const ProfileBar = () => {
                 <Box display='flex' flexWrap='wrap' p={1}>
                     <Box>
                         <Typography align='left' variant='subtitle1' className={classes.Nome}> Usuario X</Typography>
-                        <Typography align='left' variant='body2' className={classes.Cargo}> Cargo y</Typography>
                         <Breadcrumbs>
                             <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                                 <Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
@@ -57,8 +56,6 @@ const ProfileBar = () => {
                     </Box>
                 </Box>
             </Box>
-            <ExitToAppIcon style={{color: 'black', padding: '1px', position:'relative', top:'35%', left: '99%'}}
-            onClick={() => history.push('/')}/>
             </>
         )
 }

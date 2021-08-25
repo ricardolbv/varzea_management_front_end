@@ -2,9 +2,10 @@ import {React, useState} from 'react';
 import Grid from '@material-ui/core/Grid'
 import SideMenu from './SideMenu';
 import { Route, Switch } from 'react-router-dom';
+
+import AppBarInside from './AppBarInside';
 import HomeDisplay from './HomeDisplay';
-import AppBarInside from '../../common/AppBarInside';
-import ProfileBar from './ProfileBar';
+import ProfilePage from '../profile/ProfilePage';
 
 
 const HomePage = () => {
@@ -18,6 +19,7 @@ const HomePage = () => {
              <AppBarInside />
              <Switch>
                 <Route path="/home" exact component={HomeDisplay} />
+                <Route path="/home/profile" exact component={ProfilePage} />
              </Switch>
           </Grid>
         </Grid>

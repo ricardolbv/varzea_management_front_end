@@ -29,7 +29,7 @@ function TabOptions(props) {
                 <ListItemIcon > <HomeIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Home"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button  name='editPerfil' id='editPerfil' onClick= {() => history.push('/home/editProfile')} >
+            <ListItem button  name='editPerfil' id='editPerfil' onClick= {() => history.push('/home/profile')} >
                 <ListItemIcon > <AccountCircleOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Editar Perfil"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
