@@ -12,10 +12,10 @@ import HomePage from './pages/home/HomePage';
 ReactDOM.render(
   <Router>
     <Route path="/" exact component={LandingPage}/>
+    <Route path="/home" component={HomePage}/>
     <Route path="/login" exact component={LoginPage}/>
     <Route path="/howto" exact component={HowToPage}/>
     <Route path="/register" exact component={CaptainPage}/>
-    <Route path="/home" exact component={HomePage}/>
   </Router>,
   document.getElementById('root')
 );

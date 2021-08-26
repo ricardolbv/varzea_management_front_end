@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import { React } from 'react';
 import Grid from '@material-ui/core/Grid'
 import SideMenu from './SideMenu';
 import { Route, Switch } from 'react-router-dom';
@@ -6,6 +6,9 @@ import { Route, Switch } from 'react-router-dom';
 import AppBarInside from './AppBarInside';
 import HomeDisplay from './HomeDisplay';
 import ProfilePage from '../profile/ProfilePage';
+import TeamPage from '../team/TeamPage';
+import GamePage from '../game/GamePage';
+import ResultsPage from '../results/ResultsPage';
 
 
 const HomePage = () => {
@@ -20,11 +23,14 @@ const HomePage = () => {
              <Switch>
                 <Route path="/home" exact component={HomeDisplay} />
                 <Route path="/home/profile" exact component={ProfilePage} />
+                <Route path="/home/myteam" exact component={TeamPage} />
+                <Route path="/home/game" exact component={GamePage} />
+                <Route path="/home/results" exact component={ResultsPage} />
              </Switch>
           </Grid>
         </Grid>
         </>
-        )
+      )
 }
 
 
