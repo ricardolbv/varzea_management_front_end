@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Varzea Management
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto construido para a disciplina de Práticas de engenharia de software B método de trabalho [Board](https://trello.com/b/TeVuKh3Tagile-sprint-board)
 
-## Available Scripts
+## Instalando ferramentas para contribuir ao projeto
 
-In the project directory, you can run:
+### `Git`
 
-### `npm start`
+Git - Ferramenta de versionamento usada no projeto: [git](https://git-scm.com/downloads)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Executar o comando em um terminal: git -v
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `Node`
 
-### `npm test`
+Node.js - Ferramenta de execução de javascript fora do navegador, principal uso o npm, usado para gerênciar os pacotes do projeto: [node](https://nodejs.org/en/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Executar o comando em um terminal: node -v && npm -v
 
-### `npm run build`
+### `Sugestão de editor de código: Visual Code`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Visual Code - Editor de código com terminal intergado e leve: [VisualCode](https://code.visualstudio.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Abri o Visual Code após a isntalação.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Inicializando o projeto
 
-### `npm run eject`
+**`1. Passo` Baixar o código do repositório**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Criar uma pasta no Desktop>> Abrir o Visual Code>> Abrir a pasta (vazia) no VSCode
+- Abrir um terminal dentro do VSCode>> `git clone https://github.com/ricardolbv/varzea_management_front_end.git`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Ao final todas as pastas do projeto devem ser clonadas com sucesso.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**`2. Passo` Baixar dependências do package.json**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- No mesmo terminal que foi executado o 1. Passo>> Ir ao diretório do arquivo package.json e executar o comando: `cd varzea_management_front_end`
+- Uma vez dentro do diretório>> Executar o: `npm install`
 
-## Learn More
+**`3. Passo` Inicializando o proejto com o React**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Após as dependências devidamente isntaladas>> Rodar o comando de inicialização do projeto de react: `npm start`
+- Verificar no navegador após inicialização a URL: `http://localhost:3000/`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Links de libs usadas no projeto
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Material UI - Componentes estilizandos padrão Google: [MaterialUI](https://material-ui.com/)
+- Redux - Controle de estados dos componentes: [Redux](https://redux.js.org/)
+- React router - Routerização do cliente: [RouterReact](https://reactrouter.com/)
+- Axios - Efetua requisições HTTP a api Rest do projeto: [Axios](https://axios-http.com/docs/intro)
