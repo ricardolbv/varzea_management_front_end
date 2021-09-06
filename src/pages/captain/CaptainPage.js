@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import Form from './Form';
 
 const CaptainPage = () => {
-    const history = useHistory();
 
     return (
         <>
@@ -15,9 +14,6 @@ const CaptainPage = () => {
             <Typography variant='h4'>
                 Cadastrar Capitão
             </Typography>
-            <Button variant="contained" color="primary" onClick= {() => history.push('/home')}>
-                Cadastrar
-            </Button>
         </Box>
         <Form></Form>
         </>
