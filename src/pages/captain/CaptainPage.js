@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import AppBarInside from '../../common/AppBarInside';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
-import Form from './Form';
+import ManageForm from './ManageForm';
 
 const CaptainPage = () => {
 
@@ -15,7 +15,7 @@ const CaptainPage = () => {
                 Cadastrar Capitão
             </Typography>
         </Box>
-        <Form></Form>
+        <ManageForm />
         </>
     )
 }
