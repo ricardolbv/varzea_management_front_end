@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ProfileBar from './ProfileBar';
 
 
-
 const useStyle = makeStyles({
     Root: {
        backgroundColor: '#E5E5E5',
@@ -25,6 +24,9 @@ const AppBarInside = () => {
             </AppBar>
         )
 }
+
+
+
 
 
 export default AppBarInside ;

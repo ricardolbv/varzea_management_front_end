@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const useStyle = makeStyles(( theme ) => ({
     Root: {
@@ -36,7 +37,7 @@ function handleClick(event) {
 
 //<Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
 
-const ProfileBar = () => {
+const ProfileBar = (props) => {
     const history = useHistory();
     const classes = useStyle();
         return (
@@ -47,7 +48,7 @@ const ProfileBar = () => {
                 </Box>
                 <Box display='flex' flexWrap='wrap' p={1}>
                     <Box>
-                        <Typography align='left' variant='subtitle1' className={classes.Nome}> Usuario X</Typography>
+                        <Typography align='left' variant='subtitle1' className={classes.Nome}> {props.captain.nome}</Typography>
                         <Breadcrumbs>
                             <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                                 <Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
@@ -60,5 +61,9 @@ const ProfileBar = () => {
         )
 }
 
+const mapStateToProps = (state) => ({
+    captain: state.captain,  
+  })
 
-export default ProfileBar;
+
+export default connect(mapStateToProps, null)(ProfileBar);

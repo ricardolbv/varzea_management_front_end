@@ -1,9 +1,11 @@
 import { React, useState } from 'react'
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { newCaptain } from './thunks';
 
 import Form from './Form'
 
-const ManageForm = () => {  
+const ManageForm = (props) => {  
     const history = useHistory();
 
     const [nomeValidation, setNomeValid] = useState(false);
@@ -46,9 +48,8 @@ const ManageForm = () => {
             || !cepIsValidated() || !cidadeIsValidated() || !estadoIsValidated())
             return alert('erro')
 
-        setValidationsToFalse();
+        props.onCreateCaptain(capitao);
         history.push('/home')
-        return alert('form validado!');
     }
 
     /**Funções de validação de form */
@@ -140,4 +141,8 @@ const ManageForm = () => {
     )
 }
 
-export default ManageForm;
+const mapDispatchToProps = dispatch => ({
+    onCreateCaptain: captain => dispatch(newCaptain(captain)),
+})
+
+export default connect(null, mapDispatchToProps)(ManageForm);
