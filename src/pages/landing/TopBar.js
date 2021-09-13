@@ -21,8 +21,8 @@ const TopBar = () => {
             <Typography variant="h6" color="inherit">
               Varzea management app
             </Typography>
-            <Button color="inherit" style={{ position: 'fixed', left: '90%' }} onClick= {() => history.push('/howto')}>Como jogar</Button>
-            <Button color="inherit" style={{ position: 'fixed', left: '85%' }} onClick= {() => history.push('/login')} >Login</Button>
+            <Button color="inherit" style={{ position: 'fixed', left: '90%' }} onClick= {() => history.push('/howto')} id='gotoInformative'>Como jogar</Button>
+            <Button color="inherit" style={{ position: 'fixed', left: '85%' }} onClick= {() => history.push('/login')} id='gotoLogin'>Login</Button>
           </Toolbar>
         </AppBar>
       </div>

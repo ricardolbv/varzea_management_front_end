@@ -9,6 +9,7 @@ import ProfilePage from '../profile/ProfilePage';
 import TeamPage from '../team/TeamPage';
 import GamePage from '../game/GamePage';
 import ResultsPage from '../results/ResultsPage';
+import ToastVarzea from '../../common/ToastVarzea';
 
 
 const HomePage = () => {
@@ -20,6 +21,7 @@ const HomePage = () => {
           </Grid>
           <Grid item  xs={10}>
              <AppBarInside />
+             <ToastVarzea />
              <Switch>
                 <Route path="/home" exact component={HomeDisplay} />
                 <Route path="/home/profile" exact component={ProfilePage} />

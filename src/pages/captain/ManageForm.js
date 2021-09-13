@@ -46,7 +46,6 @@ const ManageForm = (props) => {
     const handleSubmit = () => {
         if (!nomeIsValidated() || !CPFIsValidated() || !telefoneIsValidated() || !enderecoIsValidated() 
             || !cepIsValidated() || !cidadeIsValidated() || !estadoIsValidated())
-            return alert('erro')
 
         props.onCreateCaptain(capitao);
         history.push('/home')
