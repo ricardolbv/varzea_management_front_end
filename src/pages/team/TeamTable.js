@@ -15,7 +15,7 @@ const jogadoresMock = [
     {'nome': 'Tst01', 'posicao': 'Lateral'},
     {'nome': 'Tst02', 'posicao': 'Lateral'},
     {'nome': 'Tst03', 'posicao': 'Meio campo'},
-    {'nome': 'Tst04', 'posicao': 'Goeleiro'},
+    {'nome': 'Tst04', 'posicao': 'Goleiro'},
 ]
 
 const TeamTable = () => {
