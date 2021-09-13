@@ -60,9 +60,10 @@ const Form = (props) => {
                     }</InputMask> 
                         <TextField label="Numero" placeholder="Entre seu número" variant="outlined" style={{ width: '32.5%', paddingRight:'1%' }}
                                    onChange={props.onHandleChange} id='numero' type="number"  
-                                   inputProps={{
-                                    pattern: "[0-9]*",
-                                }}/> 
+                                   value={props.capitao.numero}
+                                   error={props.numValidation}
+                                   {... (props.numValidation && { helperText: 'Numero negativo ou vazio'})}
+                                /> 
                         <TextField label="Complemento" placeholder="Entre seu complemento" variant="outlined" style={{ width: '33%' }}
                                    onChange={props.onHandleChange} id='complemento'/> 
                     </Grid>

@@ -15,6 +15,7 @@ const ManageForm = (props) => {
     const [cepValidation, setCepValid] = useState(false);
     const [cidadeValidation, setCidadeValid] = useState(false);
     const [estadoValidation, setEstadoValid] = useState(false);
+    const [numValidation, setNumValid] = useState(false);
 
     const [capitao, setCapitao] = useState({
         nome: '',
@@ -37,6 +38,7 @@ const ManageForm = (props) => {
     }
 
     function handleChangeSelect ({ target }) {
+        setValidationsToFalse();
         setCapitao({
             ...capitao,
             estado: target.value,
@@ -44,11 +46,11 @@ const ManageForm = (props) => {
     }
 
     const handleSubmit = () => {
-        if (!nomeIsValidated() || !CPFIsValidated() || !telefoneIsValidated() || !enderecoIsValidated() 
-            || !cepIsValidated() || !cidadeIsValidated() || !estadoIsValidated())
-
-        props.onCreateCaptain(capitao);
-        history.push('/home')
+        if (nomeIsValidated() && CPFIsValidated() && telefoneIsValidated() && enderecoIsValidated() 
+            && cepIsValidated() && cidadeIsValidated() && estadoIsValidated() && numIsValidated()) {
+                props.onCreateCaptain(capitao);
+                history.push('/home')
+            }
     }
 
     /**Funções de validação de form */
@@ -60,6 +62,7 @@ const ManageForm = (props) => {
         setCepValid(false);
         setCidadeValid(false);
         setEstadoValid(false);
+        setNumValid(false);
     }
 
     const nomeIsValidated = () => {
@@ -125,6 +128,15 @@ const ManageForm = (props) => {
         return true;
     }
 
+    const numIsValidated = () => {
+        if(capitao.numero === '' || parseInt(capitao.numero) <= 0 ){
+            setNumValid(true);
+            return false
+        }
+
+        return true;
+    }
+
     return (
         <Form onHandleChange={handleChange}
               onHandleSubmit={handleSubmit}
@@ -136,7 +148,8 @@ const ManageForm = (props) => {
               enderecovalidation={enderecoValidation}
               cepValidation={cepValidation}
               cidadeValidation={cidadeValidation}
-              estadoValidation={estadoValidation}/>
+              estadoValidation={estadoValidation}
+              numValidation={numValidation}/>
     )
 }
 
