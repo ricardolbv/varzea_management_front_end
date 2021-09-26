@@ -1,9 +1,9 @@
 import React from 'react'
-
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid'
+import GerenciaJogador from './GerenciarJogador';
 
 function PlayerForm() {
     return (
@@ -14,6 +14,14 @@ function PlayerForm() {
                 <Box m={1} p={1}>
                     <Typography variant='h4' textAlign='center'>Novo jogador: </Typography>
                 </Box>
+            </Grid>
+        </Grid>
+        <Grid container>
+            <Grid item xs={12}>
+                <GerenciaJogador/>
+            </Grid>
+            <Grid item xs={12}>
+                <GerenciaJogador/>
             </Grid>
         </Grid>
        </Paper>
