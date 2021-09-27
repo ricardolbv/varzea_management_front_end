@@ -43,17 +43,10 @@ const TeamTable = (props) => {
                             <TableCell align='center'> {row.posicao} </TableCell>
                             <TableCell align='center'> {row.nome} </TableCell>
                             <TableCell align='center'> 
-                                <TextField
-                                    id='jogos'
-                                    type="number"
-                            />
+                                {row.jogos}
                            </TableCell>
                            <TableCell align='center'> 
-                                <TextField
-                                    id='gols'
-                                    type="number"
-                                    defaultValue='0'
-                            />
+                                {row.gols}
                            </TableCell>
                         </TableRow>
                     ))}

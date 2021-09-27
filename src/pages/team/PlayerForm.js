@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid'
 import GerenciaJogador from './GerenciarJogador';
+import ManageGerenciaJogador from './ManageGerenciaJogador';
 
 function PlayerForm() {
     return (
@@ -18,7 +19,7 @@ function PlayerForm() {
         </Grid>
         <Grid container>
             <Grid item xs={12}>
-                <GerenciaJogador/>
+                <ManageGerenciaJogador/>
             </Grid>
         </Grid>
        </Paper>

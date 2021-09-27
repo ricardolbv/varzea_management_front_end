@@ -9,7 +9,7 @@ import ProfilePage from '../profile/ProfilePage';
 import TeamPage from '../team/TeamPage';
 import GamePage from '../game/GamePage';
 import ResultsPage from '../results/ResultsPage';
-import ManagePlayerForm from '../team/ManagePlayerForm';
+import PlayerForm from '../team/PlayerForm';
 import ToastVarzea from '../../common/ToastVarzea';
 
 
@@ -27,7 +27,7 @@ const HomePage = () => {
                 <Route path="/home" exact component={HomeDisplay} />
                 <Route path="/home/profile" exact component={ProfilePage} />
                 <Route path="/home/myteam" exact component={TeamPage} />
-                <Route path="/home/myteam/new-player" exact component={ManagePlayerForm} />
+                <Route path="/home/myteam/new-player" exact component={PlayerForm} />
                 <Route path="/home/game" exact component={GamePage} />
                 <Route path="/home/results" exact component={ResultsPage} />
              </Switch>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid, TextField, Button, Box } from '@material-ui/core';
-import SelecionarPosicao from './SelecionarPosicao';
-import Icon from '@material-ui/icons'
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import { InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 
-const GerenciaJogador = () => {
+
+const GerenciaJogador = (props) => {
 
     return (
     <>
@@ -43,13 +43,29 @@ const GerenciaJogador = () => {
                 
                 <Grid container spacing={2} direction="column">
                     <Grid item xs={12}>    
-                        <TextField label="Nome do Jogador" placeholder="Digite o nome do Jogador" variant="outlined" fullWidth required />
+                        <TextField label="Nome do Jogador" placeholder="Digite o nome do Jogador" variant="outlined" fullWidth required
+                                   id='nome'
+                                   onChange={props.onHandleChange}
+                                   error={props.nomeValidation}
+                                   value={props.jogador.nome}
+                                   {... (props.nomeValidation && {helperText: 'Nome com poucos caracteres' })} />
                     </Grid>   
                     <Grid item xs={12}>
-                        <SelecionarPosicao/>
+                        <TextField label='Posicao' placeholder='Selecione a posicão' fullWidth required variant='outlined'
+                                   id='posicao' select
+                                   onChange={props.onHandleSelect}
+                                   value={props.jogador.posicao}
+                                   error={props.posicaoValidation}
+                                   {... (props.posicaoValidation && { helperText: 'Posição é obrigatória'})}>
+                            <MenuItem key={1} name={'gol'} value={'Goleiro'}>Goleiro</MenuItem>
+                            <MenuItem key={2} name={'def'} value={'Defesa'}>Defesa</MenuItem>
+                            <MenuItem key={3} name={'mei'} value={'Meio-campo'}>Meio Campo</MenuItem>
+                            <MenuItem key={4} name={'ata'} value={'Atacante'}>Atacante</MenuItem>
+                        </TextField>
                     </Grid>    
                     <Grid item xs={12}>
-                        <Button size="small" variant="contained">Foto</Button> <Button size="small" variant="contained" color="primary">Adicionar</Button>
+                        <Button size="small" variant="contained">Foto</Button> 
+                        <Button size="small" variant="contained" color="primary" onClick={props.onHandleSubmit}>Adicionar</Button>
                     </Grid>
                 </Grid>
         </Box> 
