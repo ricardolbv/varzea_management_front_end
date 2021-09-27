@@ -20,9 +20,6 @@ function PlayerForm() {
             <Grid item xs={12}>
                 <GerenciaJogador/>
             </Grid>
-            <Grid item xs={12}>
-                <GerenciaJogador/>
-            </Grid>
         </Grid>
        </Paper>
        </Box>
