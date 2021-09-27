@@ -113,7 +113,7 @@ const Form = (props) => {
                     </Grid>
                     </Grid>
                     <Box paddingTop={1} display="flex" justifyContent="flex-end" alignItems="flex-end">
-                        <Button variant="contained" onClick= {props.onHandleSubmit}>
+                        <Button variant="contained" onClick= {props.onHandleSubmit} id='cadastrar'>
                             Cadastrar
                         </Button>
                     </Box>

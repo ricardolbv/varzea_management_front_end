@@ -1,4 +1,5 @@
-import React from 'react';
+import { React, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,17 +9,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 
-const jogadoresMock = [
-    {'nome': 'Bruninho doque', 'posicao': 'Zagueiro'},
-    {'nome': 'Jorge', 'posicao': 'Atacante'},
-    {'nome': 'Tst01', 'posicao': 'Lateral'},
-    {'nome': 'Tst02', 'posicao': 'Lateral'},
-    {'nome': 'Tst03', 'posicao': 'Meio campo'},
-    {'nome': 'Tst04', 'posicao': 'Goleiro'},
-]
+import { fetchPlayers } from './thunks';
 
-const TeamTable = () => {
+const TeamTable = (props) => {
+    
+    useEffect(() => {
+        props.playersLoad(props.captain.time.id);
+    }, [])
+
     return (
         <TableContainer>
             <Table size='medium'>
@@ -31,7 +32,13 @@ const TeamTable = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {jogadoresMock.map((row) => (
+                    {props.players.length === 0 ?
+                    <TableCell colSpan={4}>
+                        <Box >
+                            <Typography variant='h6' textAlign='center' style={{ marginLeft: '40%' }}> Ainda sem jogadores! </Typography>
+                        </Box>
+                    </TableCell> :
+                    props.players.map((row) => (
                         <TableRow>
                             <TableCell align='center'> {row.posicao} </TableCell>
                             <TableCell align='center'> {row.nome} </TableCell>
@@ -56,4 +63,13 @@ const TeamTable = () => {
     )
 }
 
-export default TeamTable;
+const mapStateToProps = state => ({
+    captain: state.captain,
+    players: state.players,
+})
+
+const mapDispatchToProps = dispatch => ({
+    playersLoad: id => dispatch(fetchPlayers(id)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamTable);

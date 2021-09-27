@@ -14,7 +14,7 @@ const InformativeArea = () => {
             <Typography align='center' variant='body1' style={{ color:'white', marginTop: '5vh'}}>
                 Mantenha sua equipe e prepare-se para a temporada
             </Typography>
-            <Button variant="contained" 
+            <Button variant="contained" id='inscricao'
             style={{ marginTop: '25vh', marginLeft: '38vh' }} 
             onClick= {() => history.push('/register')}>
                 Inscrever-se
