@@ -7,12 +7,13 @@ import GerenciaJogador from './GerenciarJogador';
 import ManageGerenciaJogador from './ManageGerenciaJogador';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation  } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
 
 
 function PlayerForm() {
     const history = useHistory();
+    const location = useLocation();
 
     return (
         <Box display='flex' justifyContent='center' p={2} style={{maxHeight:'80%'}}>
@@ -20,7 +21,7 @@ function PlayerForm() {
         <Grid container spacing={2}>
             <Grid xs={10} item>
                 <Box m={1} p={1}>
-                    <Typography variant='h5' textAlign='center'>Novo jogador </Typography>
+                    <Typography variant='h5' textAlign='center'> {location.pathname === '/home/myteam/new-player'? 'Novo jogador': 'Editando jogador'} </Typography>
                     <Divider size='medium'/>
                 </Box>
             </Grid>

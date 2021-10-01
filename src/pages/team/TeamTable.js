@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 
 import { fetchPlayers } from './thunks';
+import EditAndExcludePlayer from './EditAndExcludePlayer';
 
 const TeamTable = (props) => {
     
@@ -25,10 +26,11 @@ const TeamTable = (props) => {
             <Table size='medium'>
                 <TableHead style={{ backgroundColor: '#E5E5E5' }}>
                     <TableRow>
-                        <TableCell align='center'> POS </TableCell>
+                        <TableCell align='center'> Posição </TableCell>
                         <TableCell align='center'> Nome </TableCell>
                         <TableCell align='center'> Jogos </TableCell>
                         <TableCell align='center'> Gols </TableCell>
+                        <TableCell align='center'>  </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -39,7 +41,7 @@ const TeamTable = (props) => {
                         </Box>
                     </TableCell> :
                     props.players.map((row) => (
-                        <TableRow>
+                        <TableRow id={row.id}>
                             <TableCell align='center'> {row.posicao} </TableCell>
                             <TableCell align='center'> {row.nome} </TableCell>
                             <TableCell align='center'> 
@@ -47,6 +49,9 @@ const TeamTable = (props) => {
                            </TableCell>
                            <TableCell align='center'> 
                                 {row.gols}
+                           </TableCell>
+                           <TableCell>
+                               <EditAndExcludePlayer player={row}/>
                            </TableCell>
                         </TableRow>
                     ))}
