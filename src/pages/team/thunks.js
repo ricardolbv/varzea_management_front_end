@@ -8,7 +8,7 @@ import { openToast } from '../../common/actions';
 
 export const fetchPlayers = (id) => async (dispatch, getState) => {
     try {
-        const resp = await axios.get('http://127.0.0.1:8000/equipe/time/'+id);
+        const resp = await axios.get('http://127.0.0.1:8000/api/time/'+id);
         console.log(resp.data.jogadores);
         dispatch(getAllPlayers(resp.data.jogadores))
 
@@ -19,7 +19,7 @@ export const fetchPlayers = (id) => async (dispatch, getState) => {
 
 export const newPlayer = (player, id) => async (dispatch) => {
     try {
-        const resp = await axios.post('http://127.0.0.1:8000/equipe/capitao/'+id+'/time/jogador', 
+        const resp = await axios.post('http://127.0.0.1:8000/api/capitao/'+id+'/time/jogador', 
         player)
 
         dispatch(openToast({open: true, status: 'success', message:"Jogador criado com sucesso!"}));

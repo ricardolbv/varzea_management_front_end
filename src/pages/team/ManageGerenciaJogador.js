@@ -16,8 +16,11 @@ export const ManageGerenciaJogador = (props) => {
     const handleSubmit = () => {
         if (nomeIsValidated() && posicaoIsValidated()) {
                props.createPlayer(jogador, props.captain.time.id)
+               clearFields()
             }
     }
+
+    const clearFields = () => setJogador({nome: '', posicao: ''})
 
     const setValidationsToFalse = () => {
         setNomeValid(false);

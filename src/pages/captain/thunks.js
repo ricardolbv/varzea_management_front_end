@@ -18,7 +18,7 @@ export const newCaptain = (captain) => async (dispatch) => {
             } 
         }
 
-        const resp = await axios.post('http://127.0.0.1:8000/equipe/capitao/', _captain);
+        const resp = await axios.post('http://127.0.0.1:8000/api/capitao/', _captain);
         dispatch(openToast({open: true, status: 'success', message:"Capitão cadastrado com sucesso!"}));
         dispatch(createCaptain(resp.data));
 

@@ -1,24 +1,28 @@
 import React from 'react';
 import { Grid, TextField, Button, Box } from '@material-ui/core';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import { InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
+import { InputLabel, MenuItem, FormControl, Select, Typography } from '@material-ui/core';
+import { connect } from 'react-redux'
+
+import PanToolIcon from '@material-ui/icons/PanToolOutlined';
+import EmojiPeopleOutlinedIcon from '@material-ui/icons/EmojiPeopleOutlined';
+import DirectionsRunOutlinedIcon from '@material-ui/icons/DirectionsRunOutlined';
+import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 
 
 const GerenciaJogador = (props) => {
 
     return (
     <>
-    <Box
+    <Box 
+        width='150vh'
         sx={{
             m:8,
             display: 'flex',
-            flexDirection: {xs: 'row', md: 'row'},
             alignItems: 'center',
-            width: 750,
-            border: '1px solid black',
             borderRadius: 16,
-        }}>
-
+        }} boxShadow={4} paddingLeft={4}>
+        
         <Box  sx={{
             
                 m: 8,          
@@ -36,7 +40,7 @@ const GerenciaJogador = (props) => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: { xs: 'center', md: 'flex-start' },
+                alignItems: { xs: 'center', md: 'flex-center' },
                 m: -4,
                 minWidth: { md: 350 },
                 }}>
@@ -64,14 +68,39 @@ const GerenciaJogador = (props) => {
                         </TextField>
                     </Grid>    
                     <Grid item xs={12}>
-                        <Button size="small" variant="contained">Foto</Button> 
-                        <Button size="small" variant="contained" color="primary" onClick={props.onHandleSubmit}>Adicionar</Button>
+                        <Box display='flex' justifyContent='flex-end' >
+                            <Button size="small" variant="contained">Foto</Button> 
+                            <Button size="small" variant="contained" color="primary" onClick={props.onHandleSubmit} style={{ backgroundColor: '#2F303A' }}>Adicionar</Button>
+                        </Box>
                     </Grid>
                 </Grid>
         </Box> 
+
+
+            <Box paddingLeft={15} display='flex' justifyContent='flex-end' 
+            sx={{
+                
+                m: 8,          
+                minWidth: 150,
+                minHeight: 180,
+
+            }}
+            >
+                <Grid container direction='column' alignItems='center' justifyContent='center'>
+                    <Typography variant='h6'> <PanToolIcon /> Goleiros: {props.players.filter((obj) => obj.posicao === 'Goleiro').length}</Typography>
+                    <Typography variant='h6'> <EmojiPeopleOutlinedIcon /> Defesas: {props.players.filter((obj) => obj.posicao === 'Defesa').length}</Typography>
+                    <Typography variant='h6'> <DirectionsRunOutlinedIcon /> Meias: {props.players.filter((obj) => obj.posicao === 'Meio-campo').length}</Typography>
+                    <Typography variant='h6'> <DirectionsWalkIcon /> Atacantes: {props.players.filter((obj) => obj.posicao === 'Atacante').length} </Typography>
+                </Grid>
+        </Box>
     </Box>
     </>    
     )
 };
 
-export default GerenciaJogador;
+const mapStateToProps = (state) => ({
+    players: state.players,
+})
+
+
+export default connect(mapStateToProps, null)(GerenciaJogador)
