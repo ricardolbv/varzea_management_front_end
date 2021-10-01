@@ -1,22 +1,31 @@
 import { React, useState } from 'react'
 import { connect } from 'react-redux'
+import { useParams, useLocation  } from 'react-router';
 
 import GerenciaJogador from './GerenciarJogador'
-import { newPlayer } from './thunks';
+import { newPlayer, changePlayer } from './thunks';
 
 export const ManageGerenciaJogador = (props) => {
+    let {id} = useParams();
+    const location = useLocation();
+
+    const [_plr] = props.players.filter(plr => plr.id == id);
 
     const [nomeValidation, setNomeValid] = useState(false);
     const [posicaoValidation, setPositionValid] = useState(false);
     const [jogador, setJogador] = useState({
-        nome: '',
-        posicao: '',
+        nome: id !== undefined ? _plr.nome : '',
+        posicao: id !== undefined ? _plr.posicao : '',
     })
 
     const handleSubmit = () => {
         if (nomeIsValidated() && posicaoIsValidated()) {
-               props.createPlayer(jogador, props.captain.time.id)
-               clearFields()
+            clearFields()
+
+            location.pathname === '/home/myteam/new-player' ?
+                props.createPlayer(jogador, props.captain.time.id) :
+                props.updatePlayer({ 'nome': jogador.nome, 'posicao': jogador.posicao, 'id': id });
+               
             }
     }
 
@@ -76,10 +85,12 @@ export const ManageGerenciaJogador = (props) => {
 
 const mapStateToProps = (state) => ({
     captain: state.captain,
+    players: state.players,
 })
 
-const mapDispatchToProps = {
-    createPlayer: (player, id) => newPlayer(player, id),
-}
+const mapDispatchToProps = dispatch => ({
+    createPlayer: (player, id) => dispatch(newPlayer(player, id)),
+    updatePlayer: player => dispatch(changePlayer(player)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageGerenciaJogador)

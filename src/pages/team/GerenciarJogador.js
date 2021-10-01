@@ -3,6 +3,7 @@ import { Grid, TextField, Button, Box } from '@material-ui/core';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import { InputLabel, MenuItem, FormControl, Select, Typography } from '@material-ui/core';
 import { connect } from 'react-redux'
+import { useLocation  } from 'react-router';
 
 import PanToolIcon from '@material-ui/icons/PanToolOutlined';
 import EmojiPeopleOutlinedIcon from '@material-ui/icons/EmojiPeopleOutlined';
@@ -11,6 +12,7 @@ import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 
 
 const GerenciaJogador = (props) => {
+    const location = useLocation();
 
     return (
     <>
@@ -70,7 +72,11 @@ const GerenciaJogador = (props) => {
                     <Grid item xs={12}>
                         <Box display='flex' justifyContent='flex-end' >
                             <Button size="small" variant="contained">Foto</Button> 
-                            <Button size="small" variant="contained" color="primary" onClick={props.onHandleSubmit} style={{ backgroundColor: '#2F303A' }}>Adicionar</Button>
+                            <Button size="small" variant="contained" color="primary" onClick={props.onHandleSubmit} style={{ backgroundColor: '#2F303A' }}>
+                                { location.pathname === '/home/myteam/new-player' ?
+                                        'Adicionar':
+                                        'Editar'}
+                            </Button>
                         </Box>
                     </Grid>
                 </Grid>

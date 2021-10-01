@@ -28,6 +28,7 @@ const HomePage = () => {
                 <Route path="/home/profile" exact component={ProfilePage} />
                 <Route path="/home/myteam" exact component={TeamPage} />
                 <Route path="/home/myteam/new-player" exact component={PlayerForm} />
+                <Route path="/home/myteam/edit-player/:id" exact render={(props) => <PlayerForm {...props}/>}/>
                 <Route path="/home/game" exact component={GamePage} />
                 <Route path="/home/results" exact component={ResultsPage} />
              </Switch>
