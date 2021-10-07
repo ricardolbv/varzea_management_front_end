@@ -13,7 +13,7 @@ export default function OpponentsList(props) {
         <>
         <Box display='flex' justifyContent='center'>
             <Typography variant='h6'>
-                Equipes disponiveis
+                Equipes disponiveis: {props.opponents.length}
             </Typography>
         </Box>
         <Paper style={{ height: '100%' }}>
