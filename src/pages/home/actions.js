@@ -9,3 +9,9 @@ export const updateTime = time => ({
     type: UPDATE_TIME_INFO,
     payload: time
 })
+
+export const LOGOUT = "LOGOUT";
+export const logout = info => ({
+    type: LOGOUT,
+    payload: info,
+})

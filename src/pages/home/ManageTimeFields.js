@@ -17,6 +17,11 @@ const ManageTimeFields = (props) => {
         vice_capitao:  props.team.vice_capitao === '' ? '' : props.team.vice_capitao,
     })
 
+    useEffect(() => {
+        if(props.team.id != undefined)
+            props.onGetEquipe(props.team.id)
+    }, [])
+
     const handleChange = ({ target }) => {
         setValidationsToFalse();
         setTime({
