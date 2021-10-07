@@ -11,6 +11,9 @@ import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux'
+
+import { logout } from './actions';
 
 const useStyle = makeStyles({
     Root: {
@@ -45,7 +48,7 @@ function TabOptions(props) {
                 <ListItemIcon  > <AssignmentOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Resultados"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button name='sair' id='sair' onClick= {() => history.push('/')}>
+            <ListItem button name='sair' id='sair' onClick= {() => history.push('/') || props.onLogout('tst')}>
                 <ListItemIcon  > <ExitToAppOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Sair"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
@@ -53,4 +56,9 @@ function TabOptions(props) {
     )
 }
 
-export default TabOptions;
+
+const mapDispatchToProps = dispatch => ({
+    onLogout: info => dispatch(logout(info)),
+})
+
+export default connect(null, mapDispatchToProps)(TabOptions);

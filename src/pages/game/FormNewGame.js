@@ -12,6 +12,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Checkbox } from '@material-ui/core';
 
+import OpponentsList from './OpponentsList';
+
 import { getOpponents } from './thunks';
 
 export const FormNewGame = (props) => {
@@ -50,21 +52,23 @@ export const FormNewGame = (props) => {
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
-                    <Box display="center" justifyContent="center" >
+                    <Grid container spacing={1} direction='column'>
+                        <Grid item xs={12}>
                         <Box m={2} >
-                            <TextField id='oponente' variant="outlined" fullWidth select label='Oponentes'>
-                                {props.opponents.map(op => (
-                                    <MenuItem key={op.id} value={op.nome}>{op.nome}</MenuItem>
-                                ))}
-                            </TextField>
+                           <OpponentsList opponents={props.opponents}/>
                         </Box>
+                        </Grid>
+                        <Grid item xs={12}>
                         <Box m={2}>
                             <TextField id='local' variant="outlined" fullWidth label='Local de Jogo'> Local</TextField>
                         </Box>
+                       
                         <Box m={2} display='flex' justifyContent='flex-end' >
                             <Button variant="contained">Marcar</Button> 
                         </Box>
-                    </Box>
+                        </Grid>
+                   
+                    </Grid>
                 </Grid>
             </Grid>
             </FormGroup>  

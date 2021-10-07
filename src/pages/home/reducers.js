@@ -1,6 +1,7 @@
 import { 
     GET_TIME_INFO,
     UPDATE_TIME_INFO,
+    LOGOUT,
 } from "./actions";
 
 
