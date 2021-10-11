@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import Grid from '@material-ui/core/Grid';
@@ -17,10 +17,100 @@ import OpponentsList from './OpponentsList';
 import { getOpponents } from './thunks';
 
 export const FormNewGame = (props) => {
-    
+    const [modalidade, setModalidade] = useState({ 
+        futsal: true,
+        campo: false,
+        society: false,
+    })
+
+    const [mando, setMando] = useState({
+        casa: true,
+        fora: false
+    })
+
+    const [dia, setDia] = useState({
+        'Segunda-Feira': true,
+        'Terça-Feira': false,
+        'Quarta-Feira': false,
+        'Quinta-Feira': false,
+        'Sexta-Feira': false,
+        'Sabádo': false,
+        'Domingo': false,
+    })
+
     useEffect(() => {
         props.onGetOpponents(props.captain.time.id);
     }, [])
+
+    /**Preenchimento de checkbox */
+    const modalidadeChange = ({ target }) => {
+        resetModalidade()
+        setModalidade({
+            ...modalidade,
+            [ target.id ]: target.checked
+        })
+    }
+
+    const resetModalidade = () => {
+        modalidade.society = false;
+        modalidade.campo = false;
+        modalidade.futsal = false;
+    }
+
+    const mandoChange = ({ target }) => {
+        resetMando()
+        setMando({
+            ...mando,
+            [ target.id ]: target.checked
+        })
+    }
+
+    const resetMando = () => {
+        mando.casa = false;
+        mando.fora = false;
+    }
+
+    const diaChange = ({ target }) => {
+        resetDia()
+        setDia({
+            ...dia,
+            [ target.id ]: target.checked
+        })
+    }
+
+    const resetDia = () => {
+        dia['Segunda-Feira'] = false;
+        dia['Terça-Feira'] = false;
+        dia['Quarta-Feira'] = false;
+        dia['Quinta-Feira'] = false;
+        dia['Sexta-Feira'] = false;
+        dia['Sabádo'] = false;
+        dia['Domingo'] = false;
+    }
+
+
+
+    const getFilter = () => {
+        var filterModalidade = '';
+        var filterDia = '';
+        
+        /**Filtro por modalidade */
+        Object.entries(modalidade).map(entry => {
+            if (entry[1])
+                filterModalidade = entry[0];
+        });
+        /** Filtro por dia */
+        Object.entries(dia).map(entry => {
+            if (entry[1])
+                filterDia = entry[0];
+        });
+
+
+        const filter = props.opponents.filter(item => item.modalidade ==='' || item.modalidade.toLowerCase() === filterModalidade)
+
+        return filter.filter(item => item.data ==='' || item.data === filterDia)
+    }
+
 
     return (
         <>
@@ -30,24 +120,24 @@ export const FormNewGame = (props) => {
                     <Box display="center" justifyContent="center" >
                         <Box  m={2} p={1}>
                             <Typography variant='h6' textAlign='center'> Modalidade </Typography>
-                            <FormControlLabel control={<Checkbox defaultChecked color="default" />} label="Futsal" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Campo" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Society" />
+                            <FormControlLabel control={<Checkbox color="default" defaultChecked id='futsal' onChange={modalidadeChange} checked={modalidade.futsal}/>} label="Futsal" />
+                            <FormControlLabel control={<Checkbox color="default" id='campo'onChange={modalidadeChange} checked={modalidade.campo}/>} label="Campo"/>
+                            <FormControlLabel control={<Checkbox color="default" id='society' onChange={modalidadeChange} checked={modalidade.society}/>} label="Society"/>
                         </Box>
                         <Box  m={2} p={1}>
                             <Typography variant='h6' textAlign='center'> Tipo de mando de jogo </Typography>
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Casa" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Fora" />
+                            <FormControlLabel control={<Checkbox color="default" id='casa' defaultChecked checked={mando.casa} onChange={mandoChange}/> } label="Casa" />
+                            <FormControlLabel control={<Checkbox color="default" id='fora' checked={mando.fora} onChange={mandoChange}/>} label="Fora" />
                         </Box>
                         <Box  m={2} p={1}>
                             <Typography variant='h6' textAlign='center'> Dia de jogo </Typography>
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Seg" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Ter" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Qua" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Qui" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Sex" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Sab" />
-                            <FormControlLabel control={<Checkbox color="default"/>} label="Dom" />
+                            <FormControlLabel control={<Checkbox color="default" id='Segunda-Feira' defaultChecked checked={dia['Segunda-Feira']} onChange={diaChange}/>} label="Seg" />
+                            <FormControlLabel control={<Checkbox color="default" id='Terça-Feira' checked={dia['Terça-Feira']} onChange={diaChange} /> } label="Ter" />
+                            <FormControlLabel control={<Checkbox color="default" id='Quarta-Feira' checked={dia['Quarta-Feira']} onChange={diaChange}/>} label="Qua" />
+                            <FormControlLabel control={<Checkbox color="default" id='Quinta-Feira' checked={dia['Quinta-Feira']} onChange={diaChange}/>} label="Qui" />
+                            <FormControlLabel control={<Checkbox color="default" id='Sexta-Feira' checked={dia['Sexta-Feira']} onChange={diaChange}/>} label="Sex" />
+                            <FormControlLabel control={<Checkbox color="default" id='Sabádo' checked={dia['Sabádo']} onChange={diaChange}/>} label="Sab" />
+                            <FormControlLabel control={<Checkbox color="default" id='Domingo' checked={dia['Domingo']} onChange={diaChange}/>} label="Dom" />
                         </Box>
                     </Box>
                 </Grid>
@@ -55,7 +145,7 @@ export const FormNewGame = (props) => {
                     <Grid container spacing={1} direction='column'>
                         <Grid item xs={12}>
                         <Box m={2} >
-                           <OpponentsList opponents={props.opponents}/>
+                           <OpponentsList opponents={getFilter()}/>
                         </Box>
                         </Grid>
                         <Grid item xs={12}>
@@ -64,7 +154,7 @@ export const FormNewGame = (props) => {
                         </Box>
                        
                         <Box m={2} display='flex' justifyContent='flex-end' >
-                            <Button variant="contained">Marcar</Button> 
+                            <Button variant="contained" onClick={() => alert(dia['Quarta-Feira'])}>Marcar</Button> 
                         </Box>
                         </Grid>
                    

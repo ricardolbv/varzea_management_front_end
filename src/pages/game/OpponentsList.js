@@ -22,7 +22,7 @@ export default function OpponentsList(props) {
                 <ListItem disablePadding>
                     <ListItemText primary={op.nome}/>
                     <ListItemIcon>
-                        <Checkbox />
+                        <Checkbox color="default" />
                     </ListItemIcon>
                 </ListItem>
             ))}
