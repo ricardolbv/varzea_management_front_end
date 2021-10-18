@@ -14,9 +14,15 @@ import { Checkbox } from '@material-ui/core';
 
 import OpponentsList from './OpponentsList';
 
-import { getOpponents } from './thunks';
+import { getOpponents, createGame } from './thunks';
 
 export const FormNewGame = (props) => {
+    const [local, setLocal] = useState('');
+
+    const [opponent, setOpponent] = useState({
+        value: '',
+    })
+
     const [modalidade, setModalidade] = useState({ 
         futsal: true,
         campo: false,
@@ -38,11 +44,57 @@ export const FormNewGame = (props) => {
         'Domingo': false,
     })
 
+    const onSubmit = () => {
+        const game = montaBody();
+        props.onCreateGame(game);
+        setLocal('');
+        setOpponent(opponent.value = '');
+    }
+
+    const montaBody = () => {
+        const resp = {
+            idTime1 : props.captain.time.id,
+            idTime2: opponent.value,
+            modalidade :'',
+            mando : '',
+            dia : '',
+            local : local,
+            aceite: false
+        }
+
+
+        Object.entries(modalidade).map(entry => {
+            if (entry[1])
+                resp.modalidade = entry[0];
+        });
+        Object.entries(mando).map(entry => {
+            if (entry[1])
+                resp.mando = entry[0];
+        });
+        Object.entries(dia).map(entry => {
+            if (entry[1])
+                resp.dia = entry[0];
+        });
+
+        return resp;
+    }
+    
+
     useEffect(() => {
         props.onGetOpponents(props.captain.time.id);
     }, [])
 
     /**Preenchimento de checkbox */
+    const opponentChange = ({ target }) => {
+        setOpponent({
+            value: target.value
+        })
+    }
+
+    const localChange = ({ target }) => {
+        setLocal(target.value)
+    }
+
     const modalidadeChange = ({ target }) => {
         resetModalidade()
         setModalidade({
@@ -89,7 +141,7 @@ export const FormNewGame = (props) => {
     }
 
 
-
+    
     const getFilter = () => {
         var filterModalidade = '';
         var filterDia = '';
@@ -105,10 +157,11 @@ export const FormNewGame = (props) => {
                 filterDia = entry[0];
         });
 
-
         const filter = props.opponents.filter(item => item.modalidade ==='' || item.modalidade.toLowerCase() === filterModalidade)
+        var resp = filter.filter(item => item.data === '' || item.data === filterDia)
+        var reset = resp.map(item => ({ ...item, selected: false }))
 
-        return filter.filter(item => item.data ==='' || item.data === filterDia)
+        return reset
     }
 
 
@@ -145,16 +198,17 @@ export const FormNewGame = (props) => {
                     <Grid container spacing={1} direction='column'>
                         <Grid item xs={12}>
                         <Box m={2} >
-                           <OpponentsList opponents={getFilter()}/>
+                           <OpponentsList opponents={getFilter()} oponente={opponent}
+                                          onHandleOponente={opponentChange} />
                         </Box>
                         </Grid>
                         <Grid item xs={12}>
                         <Box m={2}>
-                            <TextField id='local' variant="outlined" fullWidth label='Local de Jogo'> Local</TextField>
+                            <TextField id='local' variant="outlined" fullWidth label='Local de Jogo' onChange={localChange}> Local</TextField>
                         </Box>
                        
                         <Box m={2} display='flex' justifyContent='flex-end' >
-                            <Button variant="contained" onClick={() => alert(dia['Quarta-Feira'])}>Marcar</Button> 
+                            <Button variant="contained" onClick={onSubmit}>Marcar</Button> 
                         </Box>
                         </Grid>
                    
@@ -173,6 +227,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
     onGetOpponents: id => dispatch(getOpponents(id)),
+    onCreateGame: game => dispatch(createGame(game)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormNewGame)
