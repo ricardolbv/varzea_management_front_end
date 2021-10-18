@@ -1,12 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Paper from '@material-ui/core/Paper';
 import { Typography, Box } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 export default function OpponentsList(props) {
     return (
@@ -16,18 +12,13 @@ export default function OpponentsList(props) {
                 Equipes disponiveis: {props.opponents.length}
             </Typography>
         </Box>
-        <Paper style={{ height: '100%' }}>
-        <List style={{ overflow:'auto', position: 'relative', height: '35vh'}}>
-            {props.opponents.map(op => (
-                <ListItem disablePadding>
-                    <ListItemText primary={op.nome}/>
-                    <ListItemIcon>
-                        <Checkbox color="default" />
-                    </ListItemIcon>
-                </ListItem>
-            ))}
-        </List>
-        </Paper>
+        <TextField label="Oponente" variant="outlined" fullWidth select id="oponente"
+                        onChange={props.onHandleOponente}
+                        value={props.oponente.value}>
+                            {props.opponents.map(op => (
+                                <MenuItem value={op.id}> {op.nome} </MenuItem>
+                            ))}
+        </TextField>
         </>
     )
 }
