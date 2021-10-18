@@ -1,6 +1,7 @@
 import { 
     GET_POSSIBLE_TEAMS,
     POST_GAME,
+    GET_GAMES,
 } from "./actions";
 
 export const opponents = (state = [], action) => {
@@ -24,6 +25,11 @@ export const games = (state = [], action) => {
             newGame.push(payload);
 
             return state.concat(newGame)
+
+        case GET_GAMES:
+            const { allGames } = payload;
+
+            return allGames;
         
         default:
             return state

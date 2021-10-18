@@ -47,6 +47,8 @@ export const FormNewGame = (props) => {
     const onSubmit = () => {
         const game = montaBody();
         props.onCreateGame(game);
+        setLocal('');
+        setOpponent(opponent.value = '');
     }
 
     const montaBody = () => {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
     getPossibleTeams,
     postGame,
+    getGames,
 } from './actions';
 
 import { openToast } from '../../common/actions';
@@ -24,5 +25,15 @@ export const createGame = game => async (dispatch) => {
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao criar jogo "+ error}));
+    }
+}
+
+export const retrieveGames = id => async (dispatch) => {
+    try {
+        const resp = await axios.get('http://127.0.0.1:8000/api/time/'+id);
+        dispatch(getGames(resp.data.partidas))
+
+    } catch (error) {
+        dispatch(openToast({open: true, status: 'error', message:"Erro ao carregar partidas de equipe "}));
     }
 }

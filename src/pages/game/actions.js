@@ -9,3 +9,9 @@ export const postGame = game => ({
     type: POST_GAME,
     payload: game
 })
+
+export const GET_GAMES = 'GET_GAMES';
+export const getGames = allGames => ({
+    type: GET_GAMES,
+    payload: { allGames }
+})

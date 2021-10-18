@@ -11,7 +11,7 @@ const GamePage = () => {
         <Box display='flex' justifyContent='center' p={2} style={{maxHeight:'80%'}}>
         <Paper elevation={3} style={{ width: '100%', height:'85vh' }}>
         <Grid container spacing={2}>
-            <Grid xs={10} item>
+            <Grid xs={12} item>
                 <Box m={1} p={1}>
                     <Typography variant='h5' textAlign='center'>Marcar jogo </Typography>
                     <Divider size='medium'/>
