@@ -29,11 +29,6 @@ export const FormNewGame = (props) => {
         society: false,
     })
 
-    const [mando, setMando] = useState({
-        casa: true,
-        fora: false
-    })
-
     const [dia, setDia] = useState({
         'Segunda-Feira': true,
         'Terça-Feira': false,
@@ -56,20 +51,15 @@ export const FormNewGame = (props) => {
             idTime1 : props.captain.time.id,
             idTime2: opponent.value,
             modalidade :'',
-            mando : '',
             dia : '',
             local : local,
-            aceite: false
+            aceite: 'Aguardando'
         }
 
 
         Object.entries(modalidade).map(entry => {
             if (entry[1])
                 resp.modalidade = entry[0];
-        });
-        Object.entries(mando).map(entry => {
-            if (entry[1])
-                resp.mando = entry[0];
         });
         Object.entries(dia).map(entry => {
             if (entry[1])
@@ -107,19 +97,6 @@ export const FormNewGame = (props) => {
         modalidade.society = false;
         modalidade.campo = false;
         modalidade.futsal = false;
-    }
-
-    const mandoChange = ({ target }) => {
-        resetMando()
-        setMando({
-            ...mando,
-            [ target.id ]: target.checked
-        })
-    }
-
-    const resetMando = () => {
-        mando.casa = false;
-        mando.fora = false;
     }
 
     const diaChange = ({ target }) => {
@@ -168,7 +145,7 @@ export const FormNewGame = (props) => {
     return (
         <>
         <FormGroup>
-          <Grid container direction='row' >
+          <Grid container direction='row' spacing={3}>
                 <Grid item xs={6} >
                     <Box display="center" justifyContent="center" >
                         <Box  m={2} p={1}>
@@ -176,11 +153,6 @@ export const FormNewGame = (props) => {
                             <FormControlLabel control={<Checkbox color="default" defaultChecked id='futsal' onChange={modalidadeChange} checked={modalidade.futsal}/>} label="Futsal" />
                             <FormControlLabel control={<Checkbox color="default" id='campo'onChange={modalidadeChange} checked={modalidade.campo}/>} label="Campo"/>
                             <FormControlLabel control={<Checkbox color="default" id='society' onChange={modalidadeChange} checked={modalidade.society}/>} label="Society"/>
-                        </Box>
-                        <Box  m={2} p={1}>
-                            <Typography variant='h6' textAlign='center'> Tipo de mando de jogo </Typography>
-                            <FormControlLabel control={<Checkbox color="default" id='casa' defaultChecked checked={mando.casa} onChange={mandoChange}/> } label="Casa" />
-                            <FormControlLabel control={<Checkbox color="default" id='fora' checked={mando.fora} onChange={mandoChange}/>} label="Fora" />
                         </Box>
                         <Box  m={2} p={1}>
                             <Typography variant='h6' textAlign='center'> Dia de jogo </Typography>
@@ -195,7 +167,7 @@ export const FormNewGame = (props) => {
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
-                    <Grid container spacing={1} direction='column'>
+                    <Grid container spacing={3} direction='column'>
                         <Grid item xs={12}>
                         <Box m={2} >
                            <OpponentsList opponents={getFilter()} oponente={opponent}
