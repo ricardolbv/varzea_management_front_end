@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 
 import Table from '@material-ui/core/Table';
@@ -12,7 +12,7 @@ import Box from '@material-ui/core/Box'
 import { Button } from '@material-ui/core';
 import Switch from '@material-ui/core/Switch';
 
-import { retrieveGames } from '../game/thunks';
+import { retrieveGames, getOpponents } from '../game/thunks';
 
 const data = [
     { adversario: 'Ad 1', dia: 'Terça-feira', local: 'Rua teste, 546', aceite: false },
@@ -21,6 +21,23 @@ const data = [
 ]
 
 export const GamesTable = (props) => {
+    useEffect(() => {
+        props.onGetOpponents(props.captain.time.id);
+        props.onGetGames(props.captain.time.id);
+    }, [])
+
+    const getAdversario = (id) => {
+        var resp = '';
+
+        props.oponnents.map(item => {
+            if (item.id === id){
+                resp = item
+            }
+        })
+
+        return resp.nome;
+    }
+
     return (
         <TableContainer>
         <Table size='medium'>
@@ -34,15 +51,15 @@ export const GamesTable = (props) => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {data.length === 0 ?
+                {props.games.length === 0 ?
                 <TableCell colSpan={4}>
                     <Box >
                         <Typography variant='h6' textAlign='center' style={{ marginLeft: '40%' }}> Ainda sem Jogos! </Typography>
                     </Box>
                 </TableCell> :
-                data.map((row) => (
+                props.games.map((row) => (
                     <TableRow >
-                        <TableCell align='center'> {row.adversario} </TableCell>
+                        <TableCell align='center'> {props.captain.time.id === row.times[0]? getAdversario(row.times[1]) :getAdversario(row.times[0])} </TableCell>
                         <TableCell align='center'> {row.dia} </TableCell>
                         <TableCell align='center'> {row.local} </TableCell>
                        <TableCell align='center'> {row.aceite === true ? 'Aceito' : 'Sem resposta'} </TableCell>
@@ -62,11 +79,13 @@ export const GamesTable = (props) => {
 
 const mapStateToProps = (state) => ({
     games: state.games,
-    captain: state.captain
+    captain: state.captain,
+    oponnents: state.opponents,
 })
 
 const mapDispatchToProps = dispatch => ({
-    onGetGames: id => dispatch(retrieveGames(id))
+    onGetGames: id => dispatch(retrieveGames(id)),
+    onGetOpponents: id => dispatch(getOpponents(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamesTable)
