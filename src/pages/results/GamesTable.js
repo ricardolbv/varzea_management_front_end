@@ -62,9 +62,9 @@ export const GamesTable = (props) => {
                         <TableCell align='center'> {props.captain.time.id === row.times[0]? getAdversario(row.times[1]) :getAdversario(row.times[0])} </TableCell>
                         <TableCell align='center'> {row.dia} </TableCell>
                         <TableCell align='center'> {row.local} </TableCell>
-                       <TableCell align='center'> {row.aceite === true ? 'Aceito' : 'Sem resposta'} </TableCell>
+                       <TableCell align='center'> {row.aceite} </TableCell>
                        <TableCell>
-                           {row.aceite === true ?
+                           {row.aceite === 'Aceito' ?
                            <Button variant='contained'> Sumula </Button> :
                            <></>
                            }

@@ -53,7 +53,7 @@ export const FormNewGame = (props) => {
             modalidade :'',
             dia : '',
             local : local,
-            aceite: false
+            aceite: 'Aguardando'
         }
 
 
