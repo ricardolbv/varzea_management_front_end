@@ -11,7 +11,6 @@ export const newCaptain = (captain) => async (dispatch) => {
     try {
         const _captain = {
             ...captain,
-            numero: parseInt(captain.numero),
             'time':{
                 'nome':'',
                 'modalidade': '',

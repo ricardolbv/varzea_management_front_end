@@ -15,24 +15,20 @@ const Form = (props) => {
                 <Grid xs={3} item/>
                 <Grid xs={6} item>
                 <Grid container spacing={2}>
-                    <Grid xs={12} item>
+                    <Grid xs={6} item>
                         <TextField label="Nome" placeholder="Entre seu nome completo" variant="outlined" fullWidth required
                                    onChange={props.onHandleChange} id='nome'
                                    error={props.nomeValidation}
                                    value={props.capitao.nome}
                                    {... (props.nomeValidation && { helperText: 'Nome com poucos caracteres'})}/>
                     </Grid>
-                    <Grid xs={12} item>
-                    <InputMask mask="999.999.999-99" onChange={props.onHandleChange} value={props.capitao.cpf}>
-                                        {(inputProps) =>
-                        <TextField {...inputProps} label="CPF" placeholder="Entre seu CPF" variant="outlined" fullWidth required
-                                   id='cpf'
-                                   error={props.cpfValidation}
-                                   {... (props.cpfValidation && { helperText: 'CPF inválido'})}/>
-                        }
-                    </InputMask>
+                    <Grid xs={6} item>
+                        <TextField label="Email" placeholder="Email" variant="outlined" fullWidth required
+                                   onChange={props.onHandleChange} id='email'
+                                   error={props.emailValidation}
+                                   value={props.capitao.email}
+                                   {... (props.emailValidation && { helperText: 'Formato de email invalido'})}/>
                     </Grid>
-
                     <Grid xs={12} item>
                         <TextField label="Telefone" placeholder="Entre seu telefone" variant="outlined" fullWidth required
                                    onChange={props.onHandleChange} id='telefone'
@@ -40,41 +36,23 @@ const Form = (props) => {
                                    error={props.telefoneValidation}
                                    {... (props.telefoneValidation && { helperText: 'Telefone com poucos caracteres (Min 12)'})}/>
                     </Grid>
-
-                    <Grid xs={12} item>
-                        <TextField label="Endereco" placeholder="Entre seu endereço" variant="outlined" fullWidth required
-                                   onChange={props.onHandleChange} id='endereco'
-                                   value={props.capitao.endereco}
-                                   error={props.enderecoValidation}
-                                   {... (props.enderecoValidation && { helperText: 'Endereço com poucos caracteres'})}/>
+                    <Grid xs={6} item>
+                        <TextField label="Senha" placeholder="Senha" variant="outlined" fullWidth required
+                                   onChange={props.onHandleChange} id='psw'
+                                   type='password'
+                                   value={props.capitao.psw}
+                                   error={props.pswValidation}
+                                   {... (props.pswValidation && { helperText: 'Poucos caracteres ou senhas não batem'})}/>
                     </Grid>
-
-                    <Grid xs={12} sm={12} item>
-                    <InputMask mask="99999-999" onChange={props.onHandleChange} value={props.capitao.cep}>
-                                        {(inputProps) =>
-                        <TextField {...inputProps} label="CEP"  placeholder="Entre seu CEP" variant="outlined" style={{ width: '32.3%', paddingRight:'1%' }}
-                                   id='cep'
-                                   value={props.capitao.cep}
-                                   error={props.cepValidation}
-                                   {... (props.cepValidation && { helperText: 'CEP com formato inválido'})}/>
-                    }</InputMask> 
-                        <TextField label="Numero" placeholder="Entre seu número" variant="outlined" style={{ width: '32.5%', paddingRight:'1%' }}
-                                   onChange={props.onHandleChange} id='numero' type="number"  
-                                   value={props.capitao.numero}
-                                   error={props.numValidation}
-                                   {... (props.numValidation && { helperText: 'Numero negativo ou vazio'})}
-                                /> 
-                        <TextField label="Complemento" placeholder="Entre seu complemento" variant="outlined" style={{ width: '33%' }}
-                                   onChange={props.onHandleChange} id='complemento'/> 
+                    <Grid xs={6} item>
+                        <TextField label=" Confirmar Senha" placeholder="Confirmar" variant="outlined" fullWidth required
+                                   onChange={props.onHandleChange} id='confirmPsw'
+                                   type='password'
+                                   value={props.capitao.confirmPsw}
+                                   error={props.pswValidation}
+                                   {... (props.pswValidation && { helperText: 'Poucos caracteres ou senhas não batem'})}/>
                     </Grid>
-
-                    <Grid xs={12} item>
-                        <TextField label="Cidade" placeholder="Entre seu cidade" variant="outlined" fullWidth required
-                                   onChange={props.onHandleChange} id='cidade'
-                                   value={props.capitao.cidade}
-                                   error={props.cidadeValidation}
-                                   {... (props.cidadeValidation && { helperText: 'Cidade com poucos caracteres'})}/>
-                    </Grid>
+                    
 
                     <Grid xs={12} item>
                         <TextField label="Estado" placeholder="Entre seu estado" variant="outlined" fullWidth required

@@ -9,24 +9,18 @@ const ManageForm = (props) => {
     const history = useHistory();
 
     const [nomeValidation, setNomeValid] = useState(false);
-    const [cpfValidation, setCpfValid] = useState(false);
     const [telefoneValidation, setTelefoneValid] = useState(false);
-    const [enderecoValidation, setEnderecoValid] = useState(false);
-    const [cepValidation, setCepValid] = useState(false);
-    const [cidadeValidation, setCidadeValid] = useState(false);
     const [estadoValidation, setEstadoValid] = useState(false);
-    const [numValidation, setNumValid] = useState(false);
+    const [pswValidation, setPswValid] = useState(false);
+    const [emailValidation, setEmailValid] = useState(false);
 
     const [capitao, setCapitao] = useState({
         nome: '',
-        cpf: '',
         telefone: '',
-        endereco: '',
-        cep: '',
-        numero: '',
-        complemento: '',
-        cidade: '',
         estado: '',
+        email: '',
+        psw: '',
+        confirmPsw: '',
     })
 
     const handleChange = ({ target }) => {
@@ -46,8 +40,8 @@ const ManageForm = (props) => {
     }
 
     const handleSubmit = () => {
-        if (nomeIsValidated() && CPFIsValidated() && telefoneIsValidated() && enderecoIsValidated() 
-            && cepIsValidated() && cidadeIsValidated() && estadoIsValidated() && numIsValidated()) {
+        if (nomeIsValidated()  && telefoneIsValidated() && estadoIsValidated() &&
+            pswIsValid() && mailIsValidated()) {
                 props.onCreateCaptain(capitao);
                 history.push('/home')
             }
@@ -56,27 +50,44 @@ const ManageForm = (props) => {
     /**Funções de validação de form */
     const setValidationsToFalse = () => {
         setNomeValid(false);
-        setCpfValid(false);
         setTelefoneValid(false);
-        setEnderecoValid(false);
-        setCepValid(false);
-        setCidadeValid(false);
         setEstadoValid(false);
-        setNumValid(false);
+        setPswValid(false);
+        setEmailValid(false);
     }
 
-    const nomeIsValidated = () => {
-        if(capitao.nome.length <= 2){
-            setNomeValid(true);
-            return false
+    const mailIsValidated = () => {
+        if(capitao.email === '' ){
+            setEmailValid(true);
+            return false;
+        }
+        else if(!capitao.email.toLowerCase().includes('@') || !capitao.email.toLowerCase().includes('.com')){
+            setEmailValid(true);
+            return false;
+        }
+        return true;
+    }
+
+    const pswIsValid = () => {
+        if(capitao.psw === '' ){
+            setPswValid(true);
+            return false;
+        }
+        if(capitao.psw.length <= 3){
+            setPswValid(true);
+            return false;
+        }
+        if(capitao.confirmPsw !== capitao.psw){
+            setPswValid(true);
+            return false;
         }
 
         return true;
     }
 
-    const CPFIsValidated = () => {
-        if(capitao.cpf.includes('_')){
-            setCpfValid(true);
+    const nomeIsValidated = () => {
+        if(capitao.nome.length <= 2){
+            setNomeValid(true);
             return false
         }
 
@@ -92,32 +103,6 @@ const ManageForm = (props) => {
         return true;
     }
 
-    const enderecoIsValidated = () => {
-        if(capitao.endereco.length <= 2){
-            setEnderecoValid(true);
-            return false
-        }
-
-        return true;
-    }
-
-    const cepIsValidated = () => {
-        if(capitao.cep.includes('_')){
-            setCepValid(true);
-            return false
-        }
-
-        return true;
-    }
-
-    const cidadeIsValidated = () => {
-        if(capitao.cidade.length <= 2){
-            setCidadeValid(true);
-            return false
-        }
-
-        return true;
-    }
 
     const estadoIsValidated = () => {
         if(capitao.estado === ''){
@@ -128,14 +113,6 @@ const ManageForm = (props) => {
         return true;
     }
 
-    const numIsValidated = () => {
-        if(capitao.numero === '' || parseInt(capitao.numero) <= 0 ){
-            setNumValid(true);
-            return false
-        }
-
-        return true;
-    }
 
     return (
         <Form onHandleChange={handleChange}
@@ -143,13 +120,10 @@ const ManageForm = (props) => {
               onHandleSelect={handleChangeSelect}
               capitao={capitao}
               nomeValidation={nomeValidation}
-              cpfValidation ={cpfValidation}
               telefoneValidation={telefoneValidation}
-              enderecovalidation={enderecoValidation}
-              cepValidation={cepValidation}
-              cidadeValidation={cidadeValidation}
               estadoValidation={estadoValidation}
-              numValidation={numValidation}/>
+              pswValidation={pswValidation}
+              emailValidation={emailValidation}/>
     )
 }
 
