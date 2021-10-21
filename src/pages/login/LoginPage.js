@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import FormLogin from './FormLogin';
+import ManageFormLogin from './ManageFormLogin';
 import Contact from './Contact';
 import SideImage from './SideImage';
 import { useHistory } from 'react-router-dom';
@@ -28,7 +28,7 @@ function LoginPage() {
         <Grid container direction="column" spacing={0}>
           <Grid item sm={12} xs={12} >
             <Typography component="div" className={classes.Above} />
-            <FormLogin />
+            <ManageFormLogin />
             <SideImage />
           </Grid>
           <Grid item container sm={12} xs={12} >
