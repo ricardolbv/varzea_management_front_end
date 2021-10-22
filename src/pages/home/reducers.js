@@ -2,6 +2,7 @@ import {
     GET_TIME_INFO,
     UPDATE_TIME_INFO,
     LOGOUT,
+    LOGIN,
 } from "./actions";
 
 
@@ -15,6 +16,10 @@ export const team = (state = {}, action) => {
         
         case GET_TIME_INFO:
             return state;
+
+        case LOGIN:
+            return {state,
+                ...payload};
 
         default:
             return state;

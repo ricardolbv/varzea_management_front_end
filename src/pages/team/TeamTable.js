@@ -23,8 +23,8 @@ const TeamTable = (props) => {
 
     return (
         <TableContainer>
-            <Table size='medium'>
-                <TableHead style={{ backgroundColor: '#E5E5E5' }}>
+            <Table size='small'>
+                <TableHead style={{ backgroundColor: '#C5C5C5' }}>
                     <TableRow>
                         <TableCell align='center'> Posição </TableCell>
                         <TableCell align='center'> Nome </TableCell>

@@ -15,3 +15,9 @@ export const getGames = allGames => ({
     type: GET_GAMES,
     payload: { allGames }
 })
+
+export const UPDATE_GAME = 'UPDATE_GAME';
+export const updateGame = game => ({
+    type: UPDATE_GAME,
+    payload: game
+})

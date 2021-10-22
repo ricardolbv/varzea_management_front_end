@@ -18,7 +18,7 @@ const ManageTimeFields = (props) => {
     })
 
     useEffect(() => {
-        if(props.team.id != undefined)
+       if(props.team.id != undefined)
             props.onGetEquipe(props.team.id)
     }, [])
 
