@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { Button } from '@material-ui/core';
 
+import { useHistory } from 'react-router-dom';
+
 import { retrieveGames, getOpponents } from '../game/thunks';
 import ChallengeSelect from './ChallengeSelect';
 
@@ -20,6 +22,8 @@ const MyGame = (props) => {
 
 
 export const GamesTable = (props) => {
+    const history = useHistory();
+
     useEffect(() => {
         props.onGetOpponents(props.captain.time.id);
         props.onGetGames(props.captain.time.id);
@@ -64,7 +68,7 @@ export const GamesTable = (props) => {
                         <TableCell align='center'> {row.id_mando === props.captain.time.id ? <MyGame estado={row.aceite}/> : <ChallengeSelect id_game={row.id} estado={row.aceite}/>} </TableCell>
                         <TableCell>
                            {row.aceite === 'Aceito' ?
-                           <Button variant='contained'> Sumula </Button> :
+                           <Button variant='contained' onClick={() => history.push(`/home/results/summary/${row.id}`)}> Sumula </Button> :
                            <></>
                            }
                        </TableCell>
