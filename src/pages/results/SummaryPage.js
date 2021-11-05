@@ -4,6 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
 
+import GoalsFromGame from './GoalsFromGame';
+import InsertGoalsAndCards from './InsertGoalsAndCards';
+import SubmitSummary from './SubmitSummary';
+
 import { useParams, useLocation  } from 'react-router';
 
 const ResultsPage = () => {
@@ -24,7 +28,9 @@ const ResultsPage = () => {
         <Grid container spacing={2}>
             <Grid xs={1}/>
                 <Grid xs={10} item>
-                    
+                    <GoalsFromGame />
+                    <InsertGoalsAndCards />
+                    <SubmitSummary />
                 </Grid>
             <Grid xs={1}/>
             </Grid>

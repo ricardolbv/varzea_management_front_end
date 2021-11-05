@@ -51,6 +51,7 @@ export const GamesTable = (props) => {
                     <TableCell align='center'> Local </TableCell>
                     <TableCell align='center'> Aceite </TableCell>
                     <TableCell align='center'>  </TableCell>
+                    <TableCell align='center'> Resultado </TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -66,12 +67,13 @@ export const GamesTable = (props) => {
                         <TableCell align='center'> {row.dia} </TableCell>
                         <TableCell align='center'> {row.local} </TableCell>
                         <TableCell align='center'> {row.id_mando === props.captain.time.id ? <MyGame estado={row.aceite}/> : <ChallengeSelect id_game={row.id} estado={row.aceite}/>} </TableCell>
-                        <TableCell>
+                        <TableCell align='center'>
                            {row.aceite === 'Aceito' ?
                            <Button variant='contained' onClick={() => history.push(`/home/results/summary/${row.id}`)}> Sumula </Button> :
                            <></>
                            }
                        </TableCell>
+                       <TableCell align='center'> Validando Sumula </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
