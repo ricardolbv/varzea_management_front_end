@@ -73,7 +73,7 @@ export const GamesTable = (props) => {
                            <></>
                            }
                        </TableCell>
-                       <TableCell align='center'> Validando Sumula </TableCell>
+                       <TableCell align='center'> {row.resultado}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

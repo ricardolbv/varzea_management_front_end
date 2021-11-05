@@ -11,15 +11,22 @@ import { retrieveGames, getOpponents, updateGameState } from '../game/thunks';
 const ChallengeSelect = (props) => {
     const [resp, setResp] = useState({
         aceite: '',
+        resultado: ''
     });
 
     function handleChangeSelect ({ target }) {
         setResp({
+            ...resp,
             aceite: target.value
         });
     }
 
-    const onSubmit = () => props.onUpdateGame(props.id_game, resp);
+    const onSubmit = () => {
+        if(resp.aceite === 'Aceito')
+            resp.resultado = 'Validando sumula'
+    
+        props.onUpdateGame(props.id_game, resp)
+    }
 
     
 
