@@ -20,32 +20,9 @@ const SummaryPage = (props) => {
     let { id } = useParams();
     var [_game, ] = props.games.filter(x => parseInt(x.id) === parseInt(id))
     const summaryPerson = useSummary(props.team.id, _game);
-    const [message, setMessage] = useState('');
-
-    const updateMessageAccordingToState = () => {
-        switch (props.summary.status){
-            case 'criado': 
-                setMessage('Aguardando envio de sumula do mandante')
-                break;
-
-            case 'recusado':
-                setMessage('Sumula foi recusada (pelo adversario), por favor insira novas informações sobre o jogo')
-                break;
-
-            case 'aceito': 
-                setMessage('Sumula aceita. Verifique o consolidado')
-                break;
-
-            default:
-                return setMessage('')
-        }
-    }
-
     
     useEffect(() => {
         props.onGetSummary(id);
-        updateMessageAccordingToState();
-        console.log(message);
     }, [])
 
     return (
@@ -63,11 +40,11 @@ const SummaryPage = (props) => {
             <Grid xs={1}/>
                 <Grid xs={10} item>
                     <GoalsFromGame />
-                    {summaryPerson === 'Mandante' ? 
+                    {summaryPerson === 'Mandante' && props.summary.status !== 'aceito'? 
                     <>
                     <InsertGoalsAndCards />
                     <SubmitSummary />
-                    </> : <InfoSummary status={props.summary.status} message={message}/>}
+                    </> : <InfoSummary status={props.summary.status}/>}
                 </Grid>
             <Grid xs={1}/>
             </Grid>

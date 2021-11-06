@@ -1,5 +1,6 @@
 import {
-    GET_SUMMARY
+    GET_SUMMARY,
+    UPDATE_SUMMARY
 } from "./actions";
 
 export const summary = (state = {}, action) => {
@@ -9,6 +10,12 @@ export const summary = (state = {}, action) => {
         case GET_SUMMARY:
             return payload
 
+        case UPDATE_SUMMARY:
+            return {
+                ...state,
+                payload
+            }
+        
         default:
             return state;
     }

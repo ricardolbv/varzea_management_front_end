@@ -4,3 +4,8 @@ export const getSummary = summary => ({
     payload: summary
 })
 
+export const UPDATE_SUMMARY = 'UPDATE_SUMARY';
+export const updateSummary = summary => ({
+    type: UPDATE_SUMMARY,
+    payload: summary
+})
