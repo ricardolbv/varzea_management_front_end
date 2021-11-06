@@ -10,17 +10,20 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { Button } from '@material-ui/core';
-import Switch from '@material-ui/core/Switch';
+
+import { useHistory } from 'react-router-dom';
 
 import { retrieveGames, getOpponents } from '../game/thunks';
+import ChallengeSelect from './ChallengeSelect';
 
-const data = [
-    { adversario: 'Ad 1', dia: 'Terça-feira', local: 'Rua teste, 546', aceite: false },
-    { adversario: 'Ad 2', dia: 'Quinta-feira', local: 'Rua teste, 546', aceite: true },
-    { adversario: 'Ad 3', dia: 'Quarta-feira', local: 'Rua teste, 546', aceite: false },
-]
+const MyGame = (props) => {
+    return <>{props.estado}</>;
+}
+
 
 export const GamesTable = (props) => {
+    const history = useHistory();
+
     useEffect(() => {
         props.onGetOpponents(props.captain.time.id);
         props.onGetGames(props.captain.time.id);
@@ -40,14 +43,15 @@ export const GamesTable = (props) => {
 
     return (
         <TableContainer>
-        <Table size='medium'>
-            <TableHead style={{ backgroundColor: '#E5E5E5' }}>
+        <Table size='small'>
+            <TableHead style={{ backgroundColor: '#C5C5C5' }}>
                 <TableRow>
                     <TableCell align='center'> Adversário </TableCell>
                     <TableCell align='center'> Dia </TableCell>
                     <TableCell align='center'> Local </TableCell>
                     <TableCell align='center'> Aceite </TableCell>
                     <TableCell align='center'>  </TableCell>
+                    <TableCell align='center'> Resultado </TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -58,17 +62,18 @@ export const GamesTable = (props) => {
                     </Box>
                 </TableCell> :
                 props.games.map((row) => (
-                    <TableRow >
+                    <TableRow style={{ backgroundColor: row.id_mando !== props.captain.time.id ? '#E5E5E5': 'white' }}>
                         <TableCell align='center'> {props.captain.time.id === row.times[0]? getAdversario(row.times[1]) :getAdversario(row.times[0])} </TableCell>
                         <TableCell align='center'> {row.dia} </TableCell>
                         <TableCell align='center'> {row.local} </TableCell>
-                       <TableCell align='center'> {row.aceite} </TableCell>
-                       <TableCell>
+                        <TableCell align='center'> {row.id_mando === props.captain.time.id ? <MyGame estado={row.aceite}/> : <ChallengeSelect id_game={row.id} estado={row.aceite}/>} </TableCell>
+                        <TableCell align='center'>
                            {row.aceite === 'Aceito' ?
-                           <Button variant='contained'> Sumula </Button> :
+                           <Button variant='contained' onClick={() => history.push(`/home/results/summary/${row.id}`)}> Sumula </Button> :
                            <></>
                            }
                        </TableCell>
+                       <TableCell align='center'> {row.resultado}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

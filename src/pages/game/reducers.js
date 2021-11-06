@@ -2,6 +2,7 @@ import {
     GET_POSSIBLE_TEAMS,
     POST_GAME,
     GET_GAMES,
+    UPDATE_GAME,
 } from "./actions";
 
 export const opponents = (state = [], action) => {
@@ -30,6 +31,18 @@ export const games = (state = [], action) => {
             const { allGames } = payload;
 
             return allGames;
+
+        case UPDATE_GAME:
+            return state.map(game => {
+                if(game.id !== payload.id){
+                    return game;
+                }
+                
+                return {
+                    ...game,
+                    payload
+                }
+            })
         
         default:
             return state

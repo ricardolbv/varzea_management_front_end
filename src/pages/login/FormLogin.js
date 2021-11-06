@@ -48,7 +48,7 @@ const useStyle = makeStyles({
     },
 })
 
-function FormLogin() {
+function FormLogin(props) {
     const classes = useStyle();
     return (
         <Box boxShadow={4} className={classes.Form}>
@@ -57,10 +57,18 @@ function FormLogin() {
             <form>
                 <Typography variant='subtitle1' align="center" className={classes.GreyText}>Faça seu login</Typography>
                 <Typography align="center">
-                    <TextField id="email" label="E-mail" variant="outlined" className={classes.Input} />
+                    <TextField id="email" label="E-mail" variant="outlined" className={classes.Input} 
+                               onChange={props.onHandleChange}
+                               error={props.emailValidation}
+                               value={props.capitao.email}
+                               {... (props.emailValidation && { helperText: 'Formato de email invalido'})}/>
                 </Typography>
                 <Typography align="center">
-                <TextField id="senha" label="Digite sua senha" variant="outlined" className={classes.Input} type='password'/>
+                    <TextField id="psw" label="Digite sua senha" variant="outlined" className={classes.Input} type='password'
+                               onChange={props.onHandleChange}
+                               value={props.capitao.psw}
+                               error={props.pswValidation}
+                               {... (props.pswValidation && { helperText: 'Poucos caracteres'})}/>
                 </Typography>
                 <a href="https://material-ui.com/api/text-field/">
                 <Typography align="right" className={classes.Forgot}>
@@ -68,11 +76,9 @@ function FormLogin() {
                 </Typography>
                 </a>
                 <Typography align="center">
-                <Link to='/home'>
-                <Button variant="contained" color="primary" className={classes.Btn}>
+                <Button variant="contained" color="primary" className={classes.Btn} onClick= {props.onHandleSubmit}>
                     Entre
                 </Button>
-                </Link>
                 </Typography>
             </form>
         </Paper>

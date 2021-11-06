@@ -15,3 +15,9 @@ export const logout = info => ({
     type: LOGOUT,
     payload: info,
 })
+
+export const LOGIN = "LOGIN";
+export const login = time => ({
+    type: LOGIN,
+    payload: time
+})
