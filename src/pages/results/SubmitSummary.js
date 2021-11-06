@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Box, Button } from '@material-ui/core'
+import { useHistory } from 'react-router-dom';
 
 import { updateSumula } from './thunks'
 
 export const SubmitSummary = (props) => {
     const [fields, setFields] = useState({ status: 'enviado' })
+    const history = useHistory();
 
-    const handleSubmit = () => props.onUpdateSummary(fields, props.summary.id);
+    const handleSubmit = () => {
+        props.onUpdateSummary(fields, props.summary.id)
+        history.push('/home/results')
+    }
 
     return (
         <Box display='flex' justifyContent='flex-end' m={4}>
