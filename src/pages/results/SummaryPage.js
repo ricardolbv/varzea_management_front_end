@@ -39,7 +39,7 @@ const SummaryPage = (props) => {
         <Grid container spacing={2}>
             <Grid xs={1}/>
                 <Grid xs={10} item>
-                    <GoalsFromGame />
+                    <GoalsFromGame game={_game} summaryPerson={summaryPerson}/>
                     {summaryPerson === 'Mandante' && props.summary.status !== 'aceito'? 
                     <>
                     <InsertGoalsAndCards />

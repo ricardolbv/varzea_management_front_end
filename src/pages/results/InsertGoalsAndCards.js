@@ -6,12 +6,18 @@ export const InsertGoalsAndCards = (props) => {
     return (
         <Grid container spacing={1} direction='row'>
             <Grid item xs={5}>
-                <Box>
-                    <Typography variant='h6'> Equipe </Typography>
+                <Box paddingTop={3}>
                     <Grid container direction='row' spacing={1}>
                         <Grid item xs={10}>
-                            <TextField type='select' label='Autor do gol' select fullWidth variant="outlined">
-                            </TextField>
+                            <Grid container direction='row' spacing={1}>
+                                <Grid item xs={3}>
+                                    <TextField type='number' variant="outlined"/>
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <TextField type='select' label='Autor do gol' select fullWidth variant="outlined">
+                                    </TextField>
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
@@ -34,11 +40,18 @@ export const InsertGoalsAndCards = (props) => {
             </Grid>
             <Grid item xs={1}/>
             <Grid item xs={5}>
-            <Typography variant='h6'> Equipe </Typography>
+                <Box paddingTop={3}>
                 <Grid container direction='row' spacing={1}>
                         <Grid item xs={10}>
-                            <TextField type='select' label='Autor do gol' select fullWidth variant="outlined">
-                            </TextField>
+                            <Grid container direction='row' spacing={1}>
+                                <Grid item xs={3}>
+                                    <TextField type='number' variant="outlined"/>
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <TextField type='select' label='Autor do gol' select fullWidth variant="outlined">
+                                    </TextField>
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
@@ -57,6 +70,7 @@ export const InsertGoalsAndCards = (props) => {
                             </Box>
                         </Grid>
                     </Grid>
+                </Box>
                 </Grid>
         </Grid>
     )
