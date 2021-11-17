@@ -1,6 +1,6 @@
 import {
     GET_SUMMARY,
-    UPDATE_SUMMARY
+    UPDATE_SUMMARY,
 } from "./actions";
 
 export const summary = (state = {}, action) => {
