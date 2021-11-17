@@ -6,7 +6,7 @@ export const InsertGoalsAndCards = (props) => {
     return (
         <Grid container spacing={1} direction='row'>
             <Grid item xs={5}>
-                <Box>
+                <Box paddingTop={3}>
                     <Grid container direction='row' spacing={1}>
                         <Grid item xs={10}>
                             <Grid container direction='row' spacing={1}>
@@ -40,6 +40,7 @@ export const InsertGoalsAndCards = (props) => {
             </Grid>
             <Grid item xs={1}/>
             <Grid item xs={5}>
+                <Box paddingTop={3}>
                 <Grid container direction='row' spacing={1}>
                         <Grid item xs={10}>
                             <Grid container direction='row' spacing={1}>
@@ -69,6 +70,7 @@ export const InsertGoalsAndCards = (props) => {
                             </Box>
                         </Grid>
                     </Grid>
+                </Box>
                 </Grid>
         </Grid>
     )
