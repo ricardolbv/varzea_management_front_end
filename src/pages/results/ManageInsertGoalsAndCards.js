@@ -1,67 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import InsertGoalsAndCards from './InsertGoalsAndCards';
 
 export default function ManageInsertGoalsAndCards(props) {
-    const [awayGoal, setAwayGoal] = useState({
-        autor: '',
-        qtd: 0,
-    }) 
+    const _awayGoalAuthor = useRef("");
+    const _awayGoal = useRef(0);
 
-    const [awayCard, setAwayCard] = useState({
-        autor: '',
-        tipo: '',
-    })
-
-    const [homeGoal, setHomeGoal] = useState({
-        autor: '',
-        qtd: 0,
-    }) 
-
-    const [homeCard, setHomeCard] = useState({
-        autor: '',
-        tipo: '',
-    })
-
-    /** Manager de campos */
-    const handleChangeAwayGoal = ({ target }) => {
-        setAwayGoal({
-            ...awayGoal,
-            [ target.id ]: target.value
-        })
-    }
-
-    const handleChangeAwayCard = ({ target }) => {
-        setAwayGoal({
-            ...awayGoal,
-            [ target.id ]: target.value
-        })
-    }
-
-     const handleChangeHomeGoal = ({ target }) => {
-        setAwayGoal({
-            ...homeGoal,
-            [ target.id ]: target.value
-        })
-    }
-
-    const handleChangeHomeCard = ({ target }) => {
-        setAwayGoal({
-            ...homeGoal,
-            [ target.id ]: target.value
-        })
-    }
+    /** Handler fields */
+    const handleChangeAwayGoal = ({ target }) => _awayGoal.current = target.value;
+    const handleChangeAwayGoalAuthor = ({ target }) => _awayGoalAuthor.current = target.value;
+     
 
     return (
         <InsertGoalsAndCards 
-            awayGoal={awayGoal}
-            awayCard={awayCard}
-            homeGoal={homeGoal}
-            homeCard={homeCard}
+            _awayGoal={_awayGoal}
+            _awayGoalAuthor={_awayGoalAuthor}
             onChangeAwayGoal={handleChangeAwayGoal}
-            onChangeAwayCard={handleChangeAwayCard}
-            onChangeHomeGoal={handleChangeHomeGoal}
-            onChangeHomeCard={handleChangeHomeCard}
+            onChangeAwayGoalAuthor={handleChangeAwayGoalAuthor}
             {...props}/>
     )
 }

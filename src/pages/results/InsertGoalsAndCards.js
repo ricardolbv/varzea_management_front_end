@@ -27,7 +27,7 @@ export const InsertGoalsAndCards = (props) => {
                                 </Grid>
                                 <Grid item xs={9}>
                                     <TextField type='select' label='Autor do gol' select fullWidth variant="outlined"
-                                               value={props.homeGoal.autor} onChange={props.onChangeHomeGoal} name='autor'>
+                                                name='autor'>
                                     {props.homePlayers.map(pl =>
                                         <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
                                     )}
@@ -43,15 +43,25 @@ export const InsertGoalsAndCards = (props) => {
                     </Grid>
                     <Grid container direction='row' spacing={1}>
                         <Grid item xs={10}>
-                            <TextField type='select' label='Cartão' select fullWidth variant="outlined">
-                            {props.homePlayers.map(pl =>
-                                <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
-                            )}
-                            </TextField>
+                        <Grid container direction='row' spacing={1}>
+                                <Grid item xs={3}>
+                                    <TextField variant="outlined" name='typeCardAway' select fullWidth>
+                                        <MenuItem key={1} name="vermelho" value="Vermelho"> Vermelho </MenuItem>
+                                        <MenuItem key={1} name="amarelo" value="Amarelo"> Amarelo </MenuItem>
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <TextField label='Cartão' select fullWidth variant="outlined">
+                                        {props.homePlayers.map(pl =>
+                                            <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
+                                        )}
+                                    </TextField>
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
-                            <Button variant='contained' onClick={() => alert(homeId)}> Salvar</Button>
+                            <Button variant='contained'> Salvar</Button>
                             </Box>
                         </Grid>
                     </Grid>
@@ -64,10 +74,11 @@ export const InsertGoalsAndCards = (props) => {
                         <Grid item xs={10}>
                             <Grid container direction='row' spacing={1}>
                                 <Grid item xs={3}>
-                                    <TextField type='number' variant="outlined"/>
+                                    <TextField type='number' variant="outlined" name='qtd' ref={props._awayGoal} onChange={props.onChangeAwayGoal}/>
                                 </Grid>
                                 <Grid item xs={9}>
-                                    <TextField type='select' label='Autor do gol' select fullWidth variant="outlined">
+                                    <TextField type='select' label='Autor do gol' select fullWidth variant="outlined"
+                                               ref={props._awayGoalAuthor} onChange={props.onChangeAwayGoalAuthor}  name='autor'>
                                     {props.awayPlayers.map(pl =>
                                         <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
                                     )}
@@ -77,17 +88,27 @@ export const InsertGoalsAndCards = (props) => {
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
-                            <Button variant='contained'> Salvar</Button>
+                            <Button variant='contained' onClick={() => console.log(props._awayGoalAuthor.current)}> Salvar</Button>
                             </Box>
                         </Grid>
                     </Grid>
                     <Grid container direction='row' spacing={1}>
                         <Grid item xs={10}>
-                            <TextField type='select' label='Cartão' select fullWidth variant="outlined">
-                                {props.awayPlayers.map(pl =>
-                                    <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
-                                )}
-                            </TextField>
+                             <Grid container direction='row' spacing={1}>
+                                <Grid item xs={3}>
+                                    <TextField variant="outlined" name='typeCardAway' select fullWidth>
+                                        <MenuItem key={1} name="vermelho" value="Vermelho"> Vermelho </MenuItem>
+                                        <MenuItem key={1} name="amarelo" value="Amarelo"> Amarelo </MenuItem>
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={9}>
+                                    <TextField label='Cartão' select fullWidth variant="outlined">
+                                        {props.awayPlayers.map(pl =>
+                                            <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
+                                        )}
+                                    </TextField>
+                                </Grid>
+                            </Grid>
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
