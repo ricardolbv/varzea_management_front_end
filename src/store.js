@@ -9,7 +9,7 @@ import { captain } from './pages/captain/reducers'
 import { toast } from './common/reducers'
 import { team } from './pages/home/reducers';
 import { opponents, games } from './pages/game/reducers';
-import { summary } from './pages/results/reducers';
+import { summary, awayPlayers, homePlayers } from './pages/results/reducers';
  
 const reducers = {
     captain,
@@ -19,6 +19,8 @@ const reducers = {
     opponents,
     games,
     summary,
+    awayPlayers,
+    homePlayers,
 }
 
 const appReducer = (state, action) => {

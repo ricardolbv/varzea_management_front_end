@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Typography, Grid, Box } from '@material-ui/core'
 
-import { getOpponents } from '../game/thunks'
+import { getOpponents } from '../game/thunks';
 
 export const GoalsFromGame = (props) => {
     const idOponente =  props.team.id === props.game.times[0] ? props.game.times[1] : props.game.times[0];
@@ -22,7 +22,7 @@ export const GoalsFromGame = (props) => {
                             <Typography variant='h6' align='center' >  {props.summaryPerson === 'Mandante' ? props.team.nome  : timeOponente.nome}</Typography>
                         </Grid>
                         <Grid item xs={2}>
-                            <Typography variant='h6'  align='center'>  - </Typography>
+                            <Typography variant='h6'  align='center'>  -  </Typography>
                         </Grid>
                         <Grid item xs={5}>
                             <Typography variant='h6'  align='center'>  {props.summaryPerson === 'Visitante'? props.team.nome : timeOponente.nome}</Typography>
@@ -40,7 +40,7 @@ export const GoalsFromGame = (props) => {
 
 const mapStateToProps = (state) => ({
     team: state.team,
-    opponents: state.opponents
+    opponents: state.opponents,
 })
 
 const mapDispatchToProps = dispatch => ({
