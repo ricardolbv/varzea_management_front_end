@@ -37,7 +37,7 @@ export const InsertGoalsAndCards = (props) => {
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
-                            <Button variant='contained'> Salvar</Button>
+                                <Button variant='contained' onClick={props.onSubmitGoalHome}> Salvar</Button>
                             </Box>
                         </Grid>
                     </Grid>
@@ -45,8 +45,8 @@ export const InsertGoalsAndCards = (props) => {
                         <Grid item xs={10}>
                         <Grid container direction='row' spacing={1}>
                                 <Grid item xs={3}>
-                                    <TextField variant="outlined" name='typeCardAway' select fullWidth ref={props._homeCardType}
-                                               onChange={props.onChangeHomeCardType}>
+                                    <TextField variant="outlined" name='typeCardHome' select fullWidth ref={props._homeCardType}
+                                               onChange={props.onChangeHomeCardType} >
                                         <MenuItem key={1} name="vermelho" value="Vermelho"> Vermelho </MenuItem>
                                         <MenuItem key={1} name="amarelo" value="Amarelo"> Amarelo </MenuItem>
                                     </TextField>
@@ -62,7 +62,7 @@ export const InsertGoalsAndCards = (props) => {
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
-                            <Button variant='contained'> Salvar</Button>
+                                <Button variant='contained' onClick={props.onSubmitCardHome}> Salvar</Button>
                             </Box>
                         </Grid>
                     </Grid>
@@ -89,7 +89,7 @@ export const InsertGoalsAndCards = (props) => {
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
-                            <Button variant='contained' onClick={() => console.log(props._awayGoalAuthor.current)}> Salvar</Button>
+                            <Button variant='contained' onClick={props.onSubmitGoalAway}> Salvar</Button>
                             </Box>
                         </Grid>
                     </Grid>
@@ -115,7 +115,7 @@ export const InsertGoalsAndCards = (props) => {
                         </Grid>
                         <Grid item xs={2}>
                             <Box display='flex' justifyContent='center' paddingTop={1}>
-                            <Button variant='contained' onClick={() => console.log(props._awayCardType.current)}> Salvar</Button>
+                            <Button variant='contained' onClick={props.onSubmitCardAway}> Salvar</Button>
                             </Box>
                         </Grid>
                     </Grid>

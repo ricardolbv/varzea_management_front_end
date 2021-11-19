@@ -4,6 +4,10 @@ import {
     updateSummary,
     getPlayersAway,
     getPlayersHome,
+    createGoalAway,
+    createGoalHome,
+    createCardAway,
+    createCardHome,
 } from './actions';
 
 import { openToast } from '../../common/actions';
@@ -48,4 +52,32 @@ export const loadPlayersHome = (id_time) => async (dispatch) => {
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao carregar Jogadores mandantes "+ error}));
     }
-} 
+}
+
+export const createGoal = (id_sumula, gol) => async (dispatch) => {
+    try {
+        const resp = await axios.post('http://127.0.0.1:8000/api/gol/create/sumula/'+id_sumula, { quantidade: parseInt(gol.qtd), autor: gol.autor });
+        
+        gol.time === 'Home'? dispatch(createGoalHome(gol)) : dispatch(createGoalAway(gol));
+
+        dispatch(openToast({open: true, status: 'success', message:"Gol registrado com sucesso!"}));
+
+    } catch (error) {
+        dispatch(openToast({open: true, status: 'error', message:"Erro ao cadastrar gol"+ error}));
+    }
+}
+
+export const createCard = (id_sumula, cartao) => async (dispatch) => {
+    try {
+        const resp = await axios.post('http://127.0.0.1:8000/api/cartao/create/sumula/'+id_sumula, { tipo: cartao.tipo, jogador: cartao.jogador });
+        
+        cartao.time === 'Home'? dispatch(createCardHome(cartao)) : dispatch(createCardAway(cartao));
+
+        dispatch(openToast({open: true, status: 'success', message:"Cartão registrado com sucesso!"}));
+
+    } catch (error) {
+        dispatch(openToast({open: true, status: 'error', message:"Erro ao cadastrar cartão"+ error}));
+    }
+}
+
+

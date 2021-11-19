@@ -21,3 +21,27 @@ export const getPlayersAway = players => ({
     type: GET_PLAYERS_AWAY_TEAM,
     payload: players
 })
+
+export const CREATE_GOAL_AWAY = 'CREATE_GOAL_AWAY';
+export const createGoalAway = goal => ({
+    type: CREATE_GOAL_AWAY,
+    payload: goal
+})
+
+export const CREATE_GOAL_HOME = 'CREATE_GOAL_HOME';
+export const createGoalHome = goal => ({
+    type: CREATE_GOAL_HOME,
+    payload: goal
+})
+
+export const CREATE_CARD_HOME = 'CREATE_CARD_HOME';
+export const createCardHome = card => ({
+    type: CREATE_GOAL_HOME ,
+    payload: card
+})
+
+export const CREATE_CARD_AWAY = 'CREATE_CARD_AWAY';
+export const createCardAway = card => ({
+    type: CREATE_GOAL_AWAY ,
+    payload: card
+})

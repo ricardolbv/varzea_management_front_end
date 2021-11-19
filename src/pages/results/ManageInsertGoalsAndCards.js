@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
 
 import InsertGoalsAndCards from './InsertGoalsAndCards';
+import { createGoal, createCard } from './thunks';
 
-export default function ManageInsertGoalsAndCards(props) {
+function ManageInsertGoalsAndCards(props) {
     /**Away props*/
     const _awayGoalAuthor = useRef("");
     const _awayGoal = useRef(0);
@@ -21,11 +23,49 @@ export default function ManageInsertGoalsAndCards(props) {
     const handleChangeAwayCardPlayer = ({ target }) => _awayCardPlayer.current = target.value;
     const handleChangeAwayCardType = ({ target }) => _awayCardType.current = target.value;
 
+    const handleSubmitGoalAway = () => {
+        const body = {
+            qtd : _awayGoal.current,
+            autor: _awayGoalAuthor.current,
+            time: 'Away'
+        }
+        props.onClickGoal(props.summary.id, body)
+    }
+
+    const handleSubmitGoalHome = () => {
+        const body = {
+            qtd : _homeGoal.current,
+            autor: _homeGoalAuthor.current,
+            time: 'Home'
+        }
+        props.onClickGoal(props.summary.id, body)
+    }
+
+    const handleSubmitCardHome = () => {
+        const body = {
+            tipo : _homeCardType.current,
+            jogador: _homeCardPlayer.current,
+            time: 'Home'
+        }
+        props.onClickCard(props.summary.id, body)
+    }
+
+    const handleSubmitCardAway = () => {
+        const body = {
+            tipo : _awayCardType.current,
+            jogador: _awayCardPlayer.current,
+            time: 'Away'
+        }
+        props.onClickCard(props.summary.id, body)
+    }
+
     /** Handler fields - Home */
     const handleChangeHomeGoal = ({ target }) => _homeGoal.current = target.value;
     const handleChangeHomeGoalAuthor = ({ target }) => _homeGoalAuthor.current = target.value;
     const handleChangeHomeCardPlayer = ({ target }) => _homeCardPlayer.current = target.value;
     const handleChangeHomeCardType = ({ target }) => _homeCardType.current = target.value;
+
+
 
     return (
         <InsertGoalsAndCards 
@@ -46,6 +86,22 @@ export default function ManageInsertGoalsAndCards(props) {
             onChangeHomeCardType={handleChangeHomeCardType}
             onChangeHomeGoal={handleChangeHomeGoal}
             onChangeHomeGoalAuthor={handleChangeHomeGoalAuthor}
+
+            onSubmitGoalAway={handleSubmitGoalAway}
+            onSubmitGoalHome={handleSubmitGoalHome}
+            onSubmitCardHome={handleSubmitCardHome}
+            onSubmitCardAway={handleSubmitCardAway}
             {...props}/>
     )
 }
+
+const mapStateToProps = (state) => ({
+    summary: state.summary,
+})
+
+const mapDispatchToProps = dispatch => ({
+    onClickGoal: (id_sumula, gol) => dispatch(createGoal(id_sumula, gol)),
+    onClickCard: (id_sumula, cartao) => dispatch(createCard(id_sumula, cartao)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageInsertGoalsAndCards)
