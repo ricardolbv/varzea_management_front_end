@@ -45,3 +45,15 @@ export const createCardAway = card => ({
     type: CREATE_GOAL_AWAY ,
     payload: card
 })
+
+export const GET_GOALS_FROM_MATCH_HOME = 'GET_GOALS_FROM_MATCH_HOME';
+export const getGoalsFromMatchHome = goals => ({
+    type: GET_GOALS_FROM_MATCH_HOME ,
+    payload: goals
+})
+
+export const GET_GOALS_FROM_MATCH_AWAY = 'GET_GOALS_FROM_MATCH_AWAY';
+export const getGoalsFromMatchAway = goals => ({
+    type: GET_GOALS_FROM_MATCH_AWAY ,
+    payload: goals
+})

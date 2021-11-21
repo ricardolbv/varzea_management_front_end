@@ -8,6 +8,9 @@ import {
     createGoalHome,
     createCardAway,
     createCardHome,
+    getGoalsFromMatchHome,
+    getGoalsFromMatchAway,
+
 } from './actions';
 
 import { openToast } from '../../common/actions';
@@ -56,9 +59,10 @@ export const loadPlayersHome = (id_time) => async (dispatch) => {
 
 export const createGoal = (id_sumula, gol) => async (dispatch) => {
     try {
-        const resp = await axios.post('http://127.0.0.1:8000/api/gol/create/sumula/'+id_sumula, { quantidade: parseInt(gol.qtd), autor: gol.autor });
+        var body = { quantidade: parseInt(gol.qtd), autor: gol.autor, golPara: gol.time }
+        const resp = await axios.post('http://127.0.0.1:8000/api/gol/create/sumula/'+id_sumula, body);
         
-        gol.time === 'Home'? dispatch(createGoalHome(gol)) : dispatch(createGoalAway(gol));
+        gol.time === 'Home'? dispatch(createGoalHome(body)) : dispatch(createGoalAway(body));
 
         dispatch(openToast({open: true, status: 'success', message:"Gol registrado com sucesso!"}));
 
@@ -79,5 +83,16 @@ export const createCard = (id_sumula, cartao) => async (dispatch) => {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao cadastrar cartão"+ error}));
     }
 }
+
+export const loadGoalsFromMatch = (id_partida) => async (dispatch) => {
+    try {
+        const resp = await axios.get('http://127.0.0.1:8000/api/gol/partida/'+id_partida);
+        dispatch(getGoalsFromMatchHome(resp.data.homeGoalsPlayers));
+        dispatch(getGoalsFromMatchAway(resp.data.awayGoalsPlayers));
+
+    } catch (error) {
+        dispatch(openToast({open: true, status: 'error', message:"Erro ao carregar gols de partida "+ error}));
+    }
+} 
 
 

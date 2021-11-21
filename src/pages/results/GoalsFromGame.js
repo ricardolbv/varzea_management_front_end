@@ -1,15 +1,26 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Typography, Grid, Box } from '@material-ui/core'
+import { Typography, Grid, Box, Button } from '@material-ui/core'
 
 import { getOpponents } from '../game/thunks';
+import { loadGoalsFromMatch } from './thunks'
+import useMatchGoals  from '../../hooks/useMatchGoals'
+
+import { useParams } from 'react-router';
+
 
 export const GoalsFromGame = (props) => {
+    let { id } = useParams();
+
     const idOponente =  props.team.id === props.game.times[0] ? props.game.times[1] : props.game.times[0];
     const [timeOponente, ] = props.opponents.filter(item => item.id === idOponente);
+    //Todo: Fazer uma hook que contabiliza gols adversarios e meus gols.
+    var goalsHome =  useMatchGoals(props.goalsHomeSummary)
+    var goalsAway =  useMatchGoals(props.goalsAwaySummary)
 
     useEffect(() => {
         props.onGetOpponents(props.team.id);
+        props.onLoadGoalsFromMatch(id)
     }, [])
 
     return (
@@ -30,7 +41,7 @@ export const GoalsFromGame = (props) => {
                     </Grid>
                 </Box>
                 <Box display='flex' justifyContent='center'>
-                    <Typography variant='h1'> 0 x 0 </Typography> 
+                    <Typography variant='h1'> {goalsHome} x {goalsAway} </Typography> 
                 </Box>
             </Grid>
             <Grid item xs={1}/>
@@ -41,10 +52,14 @@ export const GoalsFromGame = (props) => {
 const mapStateToProps = (state) => ({
     team: state.team,
     opponents: state.opponents,
+    summary: state.summary,
+    goalsAwaySummary: state.goalsAwaySummary,
+    goalsHomeSummary: state.goalsHomeSummary,
 })
 
 const mapDispatchToProps = dispatch => ({
     onGetOpponents: id => dispatch(getOpponents(id)),
+    onLoadGoalsFromMatch: id => dispatch(loadGoalsFromMatch(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoalsFromGame)
