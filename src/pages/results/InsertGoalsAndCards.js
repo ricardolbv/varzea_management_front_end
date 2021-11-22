@@ -28,7 +28,7 @@ export const InsertGoalsAndCards = (props) => {
                                 </Grid>
                                 <Grid item xs={9}>
                                     <TextField type='select' label='Autor do gol' select fullWidth variant="outlined" name='homeGoalAuthor'
-                                                id='homeGoalAuthor' onChange={props.onChangeSelectHomeGoalAuthor} value={props.home.homeGoalAuthor}>
+                                               id='homeGoalAuthor' onChange={props.onChangeSelectHomeGoalAuthor} value={props.home.homeGoalAuthor}>
                                     {props.homePlayers.map(pl =>
                                         <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
                                     )}

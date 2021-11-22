@@ -93,7 +93,7 @@ function ManageInsertGoalsAndCards(props) {
 
     const handleChangeHome = ({ target }) => {
         setHome({
-            ...away,
+            ...home,
             [ target.id ] : target.value
         })
     }
