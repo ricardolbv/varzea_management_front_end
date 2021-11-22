@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 
 import GoalsFromGame from './GoalsFromGame';
 import InsertGoalsAndCards from './InsertGoalsAndCards';
+import ManageInsertGoalsAndCards from './ManageInsertGoalsAndCards';
 import SubmitSummary from './SubmitSummary';
 import InfoSummary from './InfoSummary';
 
@@ -20,6 +21,7 @@ const SummaryPage = (props) => {
     let { id } = useParams();
     var [_game, ] = props.games.filter(x => parseInt(x.id) === parseInt(id))
     const summaryPerson = useSummary(props.team.id, _game);
+
     
     useEffect(() => {
         props.onGetSummary(id);
@@ -42,7 +44,7 @@ const SummaryPage = (props) => {
                     <GoalsFromGame game={_game} summaryPerson={summaryPerson}/>
                     {summaryPerson === 'Mandante' && props.summary.status !== 'aceito'? 
                     <>
-                    <InsertGoalsAndCards />
+                    <ManageInsertGoalsAndCards game={_game}/>
                     <SubmitSummary />
                     </> : <InfoSummary status={props.summary.status}/>}
                 </Grid>
