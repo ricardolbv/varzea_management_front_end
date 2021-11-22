@@ -36,13 +36,13 @@ export const createGoalHome = goal => ({
 
 export const CREATE_CARD_HOME = 'CREATE_CARD_HOME';
 export const createCardHome = card => ({
-    type: CREATE_GOAL_HOME ,
+    type: CREATE_CARD_HOME ,
     payload: card
 })
 
 export const CREATE_CARD_AWAY = 'CREATE_CARD_AWAY';
 export const createCardAway = card => ({
-    type: CREATE_GOAL_AWAY ,
+    type: CREATE_CARD_AWAY ,
     payload: card
 })
 
