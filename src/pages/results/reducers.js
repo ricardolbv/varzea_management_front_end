@@ -7,6 +7,8 @@ import {
     CREATE_GOAL_HOME,
     CREATE_CARD_HOME,
     CREATE_CARD_AWAY,
+    GET_CARDS_FROM_MATCH_AWAY,
+    GET_CARDS_FROM_MATCH_HOME,
     GET_GOALS_FROM_MATCH_HOME,
     GET_GOALS_FROM_MATCH_AWAY,
 } from "./actions";
@@ -83,6 +85,42 @@ export const goalsAwaySummary = (state = [], action) => {
             newGoal.push(payload)
 
             return state.concat(newGoal);
+
+        default:
+            return state;
+    }
+}
+
+export const cardsAwaySummary = (state = [], action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case GET_CARDS_FROM_MATCH_AWAY:
+            return payload;
+
+        case CREATE_CARD_AWAY:
+            const newCard = [];
+            newCard.push(payload)
+
+            return state.concat(newCard);
+
+        default:
+            return state;
+    }
+}
+
+export const cardsHomeSummary = (state = [], action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case GET_CARDS_FROM_MATCH_HOME:
+            return payload;
+
+        case CREATE_CARD_HOME:
+            const newCard = [];
+            newCard.push(payload)
+
+            return state.concat(newCard);
 
         default:
             return state;

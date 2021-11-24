@@ -41,7 +41,18 @@ export const GoalsFromGame = (props) => {
                     </Grid>
                 </Box>
                 <Box display='flex' justifyContent='center'>
-                    <Typography variant='h1'> {goalsHome} x {goalsAway} </Typography> 
+                <Grid container spacing={0} direction='row'>
+                        <Grid item xs={5}>
+                            <Typography variant='h1' align='center' >  {goalsHome}</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Typography variant='h1'  align='center'>  x  </Typography>
+                        </Grid>
+                        <Grid item xs={5}>
+                            <Typography variant='h1'  align='center'>  {goalsAway}</Typography>
+                        </Grid>
+                    </Grid>
+                    
                 </Box>
             </Grid>
             <Grid item xs={1}/>
