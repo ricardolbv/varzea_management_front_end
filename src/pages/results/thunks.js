@@ -10,6 +10,8 @@ import {
     createCardHome,
     getGoalsFromMatchHome,
     getGoalsFromMatchAway,
+    getCardsFromMatchHome,
+    getCardsFromMatchAway,
 
 } from './actions';
 
@@ -73,7 +75,7 @@ export const createGoal = (id_sumula, gol) => async (dispatch) => {
 
 export const createCard = (id_sumula, cartao) => async (dispatch) => {
     try {
-        const resp = await axios.post('http://127.0.0.1:8000/api/cartao/create/sumula/'+id_sumula, { tipo: cartao.tipo, jogador: cartao.jogador });
+        const resp = await axios.post('http://127.0.0.1:8000/api/cartao/create/sumula/'+id_sumula, { tipo: cartao.tipo, jogador: cartao.jogador, time: cartao.time });
         
         cartao.time === 'Home'? dispatch(createCardHome(cartao)) : dispatch(createCardAway(cartao));
 
@@ -89,6 +91,8 @@ export const loadGoalsFromMatch = (id_partida) => async (dispatch) => {
         const resp = await axios.get('http://127.0.0.1:8000/api/gol/partida/'+id_partida);
         dispatch(getGoalsFromMatchHome(resp.data.homeGoalsPlayers));
         dispatch(getGoalsFromMatchAway(resp.data.awayGoalsPlayers));
+        dispatch(getCardsFromMatchAway(resp.data.awayCards));
+        dispatch(getCardsFromMatchHome(resp.data.homeCards));
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao carregar gols de partida "+ error}));
