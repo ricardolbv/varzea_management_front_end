@@ -1,19 +1,22 @@
-import { React, useState } from 'react'
+import { React, useState } from 'react';
+import axios from 'axios';
+import { useToken } from '../../auth/useToken';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authCaptain } from '../captain/thunks';
 
+import { openToast } from '../../common/actions';
 import FormLogin from './FormLogin'
 
-const ManageFormLogin = (props) => {  
+const ManageFormLogin = (props) => {
+    const [token, setToken] = useToken();  
     const history = useHistory();
-
     const [pswValidation, setPswValid] = useState(false);
     const [emailValidation, setEmailValid] = useState(false);
 
     const [capitao, setCapitao] = useState({
         email: '',
-        psw: '',
+        password: '',
     })
 
     const handleChange = ({ target }) => {
@@ -25,12 +28,20 @@ const ManageFormLogin = (props) => {
     }
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (pswIsValid() && mailIsValidated()) {
-                props.onLoginCaptain(capitao);
-                history.push('/home')
+                const response = await axios.post(
+                    'https://localhost:44320/User/Login',
+                    { email: capitao.email, password: capitao.password } 
+                )    
+                const {token} = response.data.data;
+                setToken(token);
+                    response.status === 200 ? 
+                        history.push('/home') && props.onOpenToast("Logado com sucesso", "success") :
+                        props.onOpenToast("Erro ao logar", "error");
             }
     }
+
 
     /**Funções de validação de form */
     const setValidationsToFalse = () => {
@@ -51,11 +62,11 @@ const ManageFormLogin = (props) => {
     }
 
     const pswIsValid = () => {
-        if(capitao.psw === '' ){
+        if(capitao.password === '' ){
             setPswValid(true);
             return false;
         }
-        if(capitao.psw.length <= 3){
+        if(capitao.password.length <= 2){
             setPswValid(true);
             return false;
         }
@@ -74,7 +85,7 @@ const ManageFormLogin = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onLoginCaptain: captain => dispatch(authCaptain(captain)),
+    onOpenToast: (message, status) => dispatch(openToast({open: true, status: status, message:message})),
 })
 
 export default connect(null, mapDispatchToProps)(ManageFormLogin);

@@ -64,9 +64,9 @@ function FormLogin(props) {
                                {... (props.emailValidation && { helperText: 'Formato de email invalido'})}/>
                 </Typography>
                 <Typography align="center">
-                    <TextField id="psw" label="Digite sua senha" variant="outlined" className={classes.Input} type='password'
+                    <TextField id="password" label="Digite sua senha" variant="outlined" className={classes.Input} type='password'
                                onChange={props.onHandleChange}
-                               value={props.capitao.psw}
+                               value={props.capitao.password}
                                error={props.pswValidation}
                                {... (props.pswValidation && { helperText: 'Poucos caracteres'})}/>
                 </Typography>

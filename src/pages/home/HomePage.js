@@ -2,6 +2,7 @@ import { React } from 'react';
 import Grid from '@material-ui/core/Grid'
 import SideMenu from './SideMenu';
 import { Route, Switch } from 'react-router-dom';
+import { PrivateRoute } from '../../auth/PrivateRoute';
 
 import AppBarInside from './AppBarInside';
 import HomeDisplay from './HomeDisplay';
@@ -25,14 +26,14 @@ const HomePage = () => {
              <AppBarInside />
              <ToastVarzea />
              <Switch>
-                <Route path="/home" exact component={HomeDisplay} />
-                <Route path="/home/profile" exact component={ProfilePage} />
-                <Route path="/home/myteam" exact component={TeamPage} />
-                <Route path="/home/myteam/new-player" exact component={PlayerForm} />
-                <Route path="/home/myteam/edit-player/:id" exact render={(props) => <PlayerForm {...props}/>}/>
-                <Route path="/home/game" exact component={GamePage} />
-                <Route path="/home/results" exact component={ResultsPage} />
-                <Route path="/home/results/summary/:id" exact render={(props) => <SummaryPage {...props}/>}/>
+                <PrivateRoute path="/home" exact component={HomeDisplay} />
+                <PrivateRoute path="/home/profile" exact component={ProfilePage} />
+                <PrivateRoute path="/home/myteam" exact component={TeamPage} />
+                <PrivateRoute path="/home/myteam/new-player" exact component={PlayerForm} />
+                <PrivateRoute path="/home/myteam/edit-player/:id" exact render={(props) => <PlayerForm {...props}/>}/>
+                <PrivateRoute path="/home/game" exact component={GamePage} />
+                <PrivateRoute path="/home/results" exact component={ResultsPage} />
+                <PrivateRoute path="/home/results/summary/:id" exact render={(props) => <SummaryPage {...props}/>}/>
              </Switch>
           </Grid>
         </Grid>
