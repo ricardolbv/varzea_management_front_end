@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useUser } from '../../auth/useUser';
 
 const useStyle = makeStyles(( theme ) => ({
     Root: {
@@ -35,11 +35,12 @@ function handleClick(event) {
     console.info('You clicked a breadcrumb.');
   }
 
-//<Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
 
 const ProfileBar = (props) => {
     const history = useHistory();
     const classes = useStyle();
+    const user = useUser();
+
         return (
             <>
             <Box p={1} className={classes.Root} display='flex' flexDirection='row'>
@@ -48,7 +49,7 @@ const ProfileBar = (props) => {
                 </Box>
                 <Box display='flex' flexWrap='wrap' p={1}>
                     <Box>
-                        <Typography align='left' variant='subtitle1' className={classes.Nome}> {props.captain.nome}</Typography>
+                        <Typography align='left' variant='subtitle1' className={classes.Nome}> {user.unique_name} </Typography>
                         <Breadcrumbs>
                             <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
                                 <Typography align='left' variant='subtitle2' className={classes.Conta}> Minha conta</Typography>
@@ -61,9 +62,4 @@ const ProfileBar = (props) => {
         )
 }
 
-const mapStateToProps = (state) => ({
-    captain: state.captain,  
-  })
-
-
-export default connect(mapStateToProps, null)(ProfileBar);
+export default ProfileBar;
