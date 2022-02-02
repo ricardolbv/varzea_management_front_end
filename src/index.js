@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from './store'
-import { PrivateRoute } from './auth/PrivateRoute';
 
 import LandingPage from './pages/landing/LandingPage';
 import LoginPage from './pages/login/LoginPage';
@@ -16,7 +15,7 @@ ReactDOM.render(
   <Provider store={configureStore()}>
     <Router>
       <Route path="/" exact component={LandingPage}/>
-      <PrivateRoute path="/home" component={HomePage}/>
+      <Route path="/home" component={HomePage}/>
       <Route path="/login" exact component={LoginPage}/>
       <Route path="/howto" exact component={HowToPage}/>
       <Route path="/register" exact component={CaptainPage}/>

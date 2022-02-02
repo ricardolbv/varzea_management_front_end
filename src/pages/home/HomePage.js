@@ -2,7 +2,7 @@ import { React } from 'react';
 import Grid from '@material-ui/core/Grid'
 import SideMenu from './SideMenu';
 import { Route, Switch } from 'react-router-dom';
-import { PrivateRoute } from '../../auth/PrivateRoute';
+import PrivateRoute from '../../auth/PrivateRoute';
 
 import AppBarInside from './AppBarInside';
 import HomeDisplay from './HomeDisplay';

@@ -30,12 +30,8 @@ const ManageFormLogin = (props) => {
 
     const handleSubmit = async () => {
         if (pswIsValid() && mailIsValidated()) {
-                const response = await axios.post(
-                    'https://localhost:44320/User/Login',
-                    { email: capitao.email, password: capitao.password } 
-                )    
-                const {token} = response.data.data;
-                setToken(token);
+                const response = await axios.post('https://localhost:44320/User/Login', capitao)    
+                setToken(response.data.data);
                     response.status === 200 ? 
                         history.push('/home') && props.onOpenToast("Logado com sucesso", "success") :
                         props.onOpenToast("Erro ao logar", "error");
