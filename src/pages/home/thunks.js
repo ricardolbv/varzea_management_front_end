@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../util/AxiosConfig';
 import {
     updateTime,
     getTime,
@@ -19,11 +19,11 @@ export const updateTeam = (team, id) => async (dispatch) => {
     }
 } 
 
-export const getTeam = (id) => async (dispatch) => {
+export const getTeam = () => async (dispatch) => {
     try {
 
-        const resp = await axios.get('http://127.0.0.1:8000/api/time/'+id);
-        dispatch(getTime(resp.data));
+        const resp = await axios.get('Team/MyTeam');
+        dispatch(getTime(resp.data.data));
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao retornar equipe"+ error}));

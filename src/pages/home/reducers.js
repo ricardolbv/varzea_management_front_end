@@ -15,7 +15,7 @@ export const team = (state = {}, action) => {
                     ...payload};
         
         case GET_TIME_INFO:
-            return state;
+            return payload;
 
         case LOGIN:
             return {state,

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useToken } from '../../auth/useToken';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { authCaptain } from '../captain/thunks';
+import { getTeam } from '../home/thunks';
 
 import { openToast } from '../../common/actions';
 import FormLogin from './FormLogin'
@@ -31,10 +31,17 @@ const ManageFormLogin = (props) => {
     const handleSubmit = async () => {
         if (pswIsValid() && mailIsValidated()) {
                 const response = await axios.post('https://localhost:44320/User/Login', capitao)    
-                setToken(response.data.data);
-                    response.status === 200 ? 
-                        history.push('/home') && props.onOpenToast("Logado com sucesso", "success") :
-                        props.onOpenToast("Erro ao logar", "error");
+                if(response.status === 200)
+                {
+                    setToken(response.data.data);
+                    await props.onGetEquipe();
+                    history.push('/home');
+                }
+                else
+                {
+                    props.onOpenToast("Erro ao logar", "error");
+                    alert("Error de login");
+                }
             }
     }
 
@@ -81,6 +88,7 @@ const ManageFormLogin = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
+    onGetEquipe: () => dispatch(getTeam()),
     onOpenToast: (message, status) => dispatch(openToast({open: true, status: status, message:message})),
 })
 

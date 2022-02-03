@@ -9,18 +9,22 @@ const ManageTimeFields = (props) => {
     const [modalidadeValidation, setModalidadeValid] = useState(false);
     const [diaJogoValidation, setDiaJogoValid] = useState(false);
     
+    useEffect(() => {
+        props.onGetEquipe()
+        setTime({
+            nome: props.team.name,
+            modalidade:  props.team.modality,
+            data: props.team.gameDay,
+            vice_capitao: props.team.viceCaptain,
+        })
+    }, [])
 
     const [time, setTime] = useState({
-        nome: props.team.nome === '' ? '' : props.team.nome,
-        modalidade: props.team.modalidade === '' ? '' : props.team.modalidade,
-        data:  props.team.data === '' ? '' : props.team.data,
-        vice_capitao:  props.team.vice_capitao === '' ? '' : props.team.vice_capitao,
+        nome: "",
+        modalidade: "",
+        data: "",
+        vice_capitao: "",
     })
-
-    useEffect(() => {
-       if(props.team.id != undefined)
-            props.onGetEquipe(props.team.id)
-    }, [])
 
     const handleChange = ({ target }) => {
         setValidationsToFalse();
@@ -115,7 +119,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onGetEquipe: id => dispatch(getTeam(id)),
+    onGetEquipe: () => dispatch(getTeam()),
     onUpdateEquipe: (equipe, id) => dispatch(updateTeam(equipe, id)),
 })
 
