@@ -1,16 +1,18 @@
 import { React, useState, useEffect } from 'react'
 import { connect } from 'react-redux';
+import { useToken } from '../../auth/useToken';
 import { getTeam, updateTeam } from './thunks';
 
 import TimeFields from './TimeFields'
 
 const ManageTimeFields = (props) => {  
+    const [token, setToken] = useToken();  
     const [nomeValidation, setNomeValid] = useState(false);
     const [modalidadeValidation, setModalidadeValid] = useState(false);
     const [diaJogoValidation, setDiaJogoValid] = useState(false);
     
     useEffect(() => {
-        props.onGetEquipe()
+        props.onGetEquipe(token)
         setTime({
             nome: props.team.name,
             modalidade:  props.team.modality,
@@ -60,7 +62,7 @@ const ManageTimeFields = (props) => {
 
     const handleSubmit = () => {
         if (nomeIsValidated() && modalidadeIsValidated() && diaJogoIsValidated()) {
-                props.onUpdateEquipe(time, props.captain.time.id)
+                props.onUpdateEquipe(time, token)
             }
     }
 
@@ -119,8 +121,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onGetEquipe: () => dispatch(getTeam()),
-    onUpdateEquipe: (equipe, id) => dispatch(updateTeam(equipe, id)),
+    onGetEquipe: token => dispatch(getTeam(token)),
+    onUpdateEquipe: (equipe, token) => dispatch(updateTeam(equipe, token)),
 })
 
 

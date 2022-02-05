@@ -39,11 +39,17 @@ const ManageForm = (props) => {
         })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (nomeIsValidated()  && telefoneIsValidated() && estadoIsValidated() &&
             pswIsValid() && mailIsValidated()) {
-                props.onCreateCaptain(capitao);
-                history.push('/home')
+                try {
+                    await props.onCreateCaptain(capitao);
+                    history.push('/login')
+                } 
+                catch (error) 
+                {
+                    alert("Erro ao criar capitão" + error);   
+                }
             }
     }
 

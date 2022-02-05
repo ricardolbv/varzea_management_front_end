@@ -48,7 +48,10 @@ function TabOptions(props) {
                 <ListItemIcon  > <AssignmentOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Resultados"} style={{ color: "white", width: "auto" }}/>
             </ListItem>
-            <ListItem button name='sair' id='sair' onClick= {() => history.push('/') || props.onLogout('tst')}>
+            <ListItem button name='sair' id='sair' onClick= {() => {
+                        localStorage.removeItem('token');
+                        history.push('/'); 
+                        props.onLogout('tst')}}>
                 <ListItemIcon  > <ExitToAppOutlinedIcon style={{ color: "white"}}/>  </ListItemIcon>
                 <ListItemText primary={"Sair"} style={{ color: "white", width: "auto" }}/>
             </ListItem>

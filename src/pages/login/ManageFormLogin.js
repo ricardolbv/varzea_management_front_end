@@ -34,8 +34,8 @@ const ManageFormLogin = (props) => {
                 if(response.status === 200)
                 {
                     setToken(response.data.data);
-                    await props.onGetEquipe();
                     history.push('/home');
+                    //await props.onGetEquipe(response.data.data);
                 }
                 else
                 {
@@ -88,7 +88,7 @@ const ManageFormLogin = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onGetEquipe: () => dispatch(getTeam()),
+    onGetEquipe: token => dispatch(getTeam(token)),
     onOpenToast: (message, status) => dispatch(openToast({open: true, status: status, message:message})),
 })
 
