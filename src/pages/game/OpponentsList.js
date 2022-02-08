@@ -16,7 +16,7 @@ export default function OpponentsList(props) {
                         onChange={props.onHandleOponente}
                         value={props.oponente.value}>
                             {props.opponents.map(op => (
-                                <MenuItem value={op.id}> {op.nome} </MenuItem>
+                                <MenuItem value={op.id}> {op.name} </MenuItem>
                             ))}
         </TextField>
         </>

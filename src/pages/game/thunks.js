@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../util/AxiosConfig';
 import {
     getPossibleTeams,
     postGame,
@@ -8,10 +8,10 @@ import {
 
 import { openToast } from '../../common/actions';
 
-export const getOpponents = (id) => async (dispatch) => {
+export const getOpponents = (token) => async (dispatch) => {
     try {
-        const resp = await axios.get('http://127.0.0.1:8000/api/time/times-dispo/'+id);
-        dispatch(getPossibleTeams(resp.data));
+        const resp = await axios.get('Team/Opponents', { headers: { Authorization: `Bearer ${token}`}});
+        dispatch(getPossibleTeams(resp.data.data));
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao retornar equipes"+ error}));

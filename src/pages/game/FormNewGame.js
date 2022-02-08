@@ -13,11 +13,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { Checkbox } from '@material-ui/core';
 
 import OpponentsList from './OpponentsList';
-
+import { useToken } from '../../auth/useToken';
 import { getOpponents, createGame } from './thunks';
 
 export const FormNewGame = (props) => {
     const [local, setLocal] = useState('');
+    const [token, setToken] = useToken();
 
     const [opponent, setOpponent] = useState({
         value: '',
@@ -71,7 +72,7 @@ export const FormNewGame = (props) => {
     
 
     useEffect(() => {
-        props.onGetOpponents(props.captain.time.id);
+        props.onGetOpponents(token);
     }, [])
 
     /**Preenchimento de checkbox */
@@ -134,8 +135,8 @@ export const FormNewGame = (props) => {
                 filterDia = entry[0];
         });
 
-        const filter = props.opponents.filter(item => item.modalidade ==='' || item.modalidade.toLowerCase() === filterModalidade)
-        var resp = filter.filter(item => item.data === '' || item.data === filterDia)
+        const filter = props.opponents.filter(item => item.modality ==='' || item.modality.toLowerCase() === filterModalidade)
+        var resp = filter.filter(item => item.gameDay === '' || item.gameDay === filterDia)
         var reset = resp.map(item => ({ ...item, selected: false }))
 
         return reset
@@ -198,7 +199,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onGetOpponents: id => dispatch(getOpponents(id)),
+    onGetOpponents: token => dispatch(getOpponents(token)),
     onCreateGame: game => dispatch(createGame(game)),
 })
 
