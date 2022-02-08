@@ -19,7 +19,6 @@ const dados = {
 }
 
 export const TimeFields = (props) => {
-
     return (
         <>
           <Grid container direction='row' >
@@ -101,12 +100,12 @@ export const TimeFields = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    captain: state.captain,
+    team: state.team,
     players: state.players
 })
 
 const mapDispatchToProps = dispatch => ({
-    onGetEquipe: id => dispatch(getTeam(id)),
+    GetEquipe: () => dispatch(getTeam()),
     onUpdateEquipe: (equipe, id) => dispatch(updateTeam(equipe, id)),
 })
 

@@ -63,10 +63,10 @@ const GerenciaJogador = (props) => {
                                    value={props.jogador.posicao}
                                    error={props.posicaoValidation}
                                    {... (props.posicaoValidation && { helperText: 'Posição é obrigatória'})}>
-                            <MenuItem key={1} name={'gol'} value={'Goleiro'}>Goleiro</MenuItem>
-                            <MenuItem key={2} name={'def'} value={'Defesa'}>Defesa</MenuItem>
-                            <MenuItem key={3} name={'mei'} value={'Meio-campo'}>Meio Campo</MenuItem>
-                            <MenuItem key={4} name={'ata'} value={'Atacante'}>Atacante</MenuItem>
+                            <MenuItem key={1} name={'gol'} value={0}>Goleiro</MenuItem>
+                            <MenuItem key={2} name={'def'} value={1}>Defesa</MenuItem>
+                            <MenuItem key={3} name={'mei'} value={2}>Meio Campo</MenuItem>
+                            <MenuItem key={4} name={'ata'} value={3}>Atacante</MenuItem>
                         </TextField>
                     </Grid>    
                     <Grid item xs={12}>
@@ -93,10 +93,10 @@ const GerenciaJogador = (props) => {
             }}
             >
                 <Grid container direction='column' alignItems='center' justifyContent='center'>
-                    <Typography variant='h6'> <PanToolIcon /> Goleiros: {props.players.filter((obj) => obj.posicao === 'Goleiro').length}</Typography>
-                    <Typography variant='h6'> <EmojiPeopleOutlinedIcon /> Defesas: {props.players.filter((obj) => obj.posicao === 'Defesa').length}</Typography>
-                    <Typography variant='h6'> <DirectionsRunOutlinedIcon /> Meias: {props.players.filter((obj) => obj.posicao === 'Meio-campo').length}</Typography>
-                    <Typography variant='h6'> <DirectionsWalkIcon /> Atacantes: {props.players.filter((obj) => obj.posicao === 'Atacante').length} </Typography>
+                    <Typography variant='h6'> <PanToolIcon /> Goleiros: {props.players.filter((obj) => obj.position === 0).length}</Typography>
+                    <Typography variant='h6'> <EmojiPeopleOutlinedIcon /> Defesas: {props.players.filter((obj) => obj.position === 1).length}</Typography>
+                    <Typography variant='h6'> <DirectionsRunOutlinedIcon /> Meias: {props.players.filter((obj) => obj.position === 2).length}</Typography>
+                    <Typography variant='h6'> <DirectionsWalkIcon /> Atacantes: {props.players.filter((obj) => obj.position === 3).length} </Typography>
                 </Grid>
         </Box>
     </Box>

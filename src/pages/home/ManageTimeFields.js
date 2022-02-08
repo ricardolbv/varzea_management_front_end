@@ -12,20 +12,14 @@ const ManageTimeFields = (props) => {
     const [diaJogoValidation, setDiaJogoValid] = useState(false);
     
     useEffect(() => {
-        props.onGetEquipe(token)
-        setTime({
-            nome: props.team.name,
-            modalidade:  props.team.modality,
-            data: props.team.gameDay,
-            vice_capitao: props.team.viceCaptain,
-        })
+        props.onGetEquipe(token);
     }, [])
 
     const [time, setTime] = useState({
-        nome: "",
-        modalidade: "",
-        data: "",
-        vice_capitao: "",
+        nome: props.team.name,
+        modalidade: props.team.modality,
+        data: props.team.gameDay,
+        vice_capitao: props.team.viceCaptain,
     })
 
     const handleChange = ({ target }) => {

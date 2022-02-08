@@ -6,15 +6,17 @@ import DeletAlertDialog from '../../common/DeletAlertDialog';
 import { useHistory } from 'react-router-dom';
 import { players } from './reducers';
 import { deletePlayer } from './thunks';
+import { useToken } from '../../auth/useToken';
 
 const RetailEditAndExcludeEnable = (props) => {
+    const [token, setToken] = useToken();
     const [openDialog, setHandleDialog] = useState(false);
     const handleCloseDialog = () => setHandleDialog(false);
     const history = useHistory();
 
 
     function handleExclude (){
-        props.onDeletePlayer(props.player.id)
+        props.onDeletePlayer(props.player.id, token)
         setHandleDialog(false);
     }
 
@@ -36,7 +38,7 @@ const RetailEditAndExcludeEnable = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    onDeletePlayer: id => dispatch(deletePlayer(id)),
+    onDeletePlayer: (id, token) => dispatch(deletePlayer(id, token)),
 })
 
 export default connect(null, mapDispatchToProps)(RetailEditAndExcludeEnable);

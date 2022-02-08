@@ -11,14 +11,16 @@ import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
+import { useToken } from '../../auth/useToken';
 
 import { fetchPlayers } from './thunks';
 import EditAndExcludePlayer from './EditAndExcludePlayer';
 
 const TeamTable = (props) => {
-    
+    const [token, setToken] = useToken();
+
     useEffect(() => {
-        props.playersLoad(props.captain.time.id);
+        props.playersLoad(token);
     }, [])
 
     return (
@@ -40,15 +42,16 @@ const TeamTable = (props) => {
                             <Typography variant='h6' textAlign='center' style={{ marginLeft: '40%' }}> Ainda sem jogadores! </Typography>
                         </Box>
                     </TableCell> :
+                    //Todo mudar get players dto para retornar info necessaria
                     props.players.map((row) => (
                         <TableRow id={row.id}>
-                            <TableCell align='center'> {row.posicao} </TableCell>
-                            <TableCell align='center'> {row.nome} </TableCell>
+                            <TableCell align='center'> {row.position} </TableCell>
+                            <TableCell align='center'> {row.name} </TableCell>
                             <TableCell align='center'> 
-                                {row.jogos}
+                                {1} 
                            </TableCell>
                            <TableCell align='center'> 
-                                {row.gols}
+                                {1}
                            </TableCell>
                            <TableCell>
                                <EditAndExcludePlayer player={row}/>
@@ -62,12 +65,11 @@ const TeamTable = (props) => {
 }
 
 const mapStateToProps = state => ({
-    captain: state.captain,
     players: state.players,
 })
 
 const mapDispatchToProps = dispatch => ({
-    playersLoad: id => dispatch(fetchPlayers(id)),
+    playersLoad: token => dispatch(fetchPlayers(token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamTable);

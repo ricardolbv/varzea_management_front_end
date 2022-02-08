@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../util/AxiosConfig';
 import { 
     getAllPlayers, 
     createPlayer,
@@ -8,21 +8,24 @@ import {
 from './actions';
 import { openToast } from '../../common/actions';
 
-export const fetchPlayers = (id) => async (dispatch, getState) => {
+export const fetchPlayers = (token) => async (dispatch) => {
     try {
-        const resp = await axios.get('http://127.0.0.1:8000/api/time/'+id);
-        console.log(resp.data.jogadores);
-        dispatch(getAllPlayers(resp.data.jogadores))
+        const resp = await axios.get('Player/AllPlayers', { headers: { Authorization: `Bearer ${token}`}});
+        dispatch(getAllPlayers(resp.data.data))
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao cadastrar capitão "+ error}));
     }
 }
 
-export const newPlayer = (player, id) => async (dispatch) => {
+export const newPlayer = (player, token) => async (dispatch) => {
     try {
-        const resp = await axios.post('http://127.0.0.1:8000/api/capitao/'+id+'/time/jogador', 
-        player)
+        const _player = {
+            "name": player.nome,
+            "position": player.posicao,
+        }
+
+        const resp = await axios.post('Player', _player, { headers: { Authorization: `Bearer ${token}`}}); 
 
         dispatch(openToast({open: true, status: 'success', message:"Jogador criado com sucesso!"}));
         dispatch(createPlayer(resp.data));
@@ -32,9 +35,9 @@ export const newPlayer = (player, id) => async (dispatch) => {
     }
 }
 
-export const deletePlayer = (id) => async (dispatch, getState) => {
+export const deletePlayer = (id, token) => async (dispatch) => {
     try {
-        await axios.delete('http://127.0.0.1:8000/api/jogador/delete/'+id);
+        await axios.delete('Player/'+id, { headers: { Authorization: `Bearer ${token}`}});
 
         dispatch(excludePlayer(id))
         dispatch(openToast({open: true, status: 'success', message: "Jogador deletado!"}));
@@ -44,9 +47,15 @@ export const deletePlayer = (id) => async (dispatch, getState) => {
     }
 }
 
-export const changePlayer = (player) => async (dispatch, getState) => {
+export const changePlayer = (player, token) => async (dispatch, getState) => {
     try {
-        await axios.put('http://127.0.0.1:8000/api/jogador/update/'+player.id, player);
+        const _pl = {
+            "id": player.id,
+            "name": player.nome,
+            "position": player.posicao
+        }
+
+        await axios.put('Player/', _pl, { headers: { Authorization: `Bearer ${token}`}});
 
         dispatch(updatePlayer(player.id))
         dispatch(openToast({open: true, status: 'success', message: "Jogador editado!"}));
