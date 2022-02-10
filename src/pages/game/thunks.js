@@ -18,9 +18,9 @@ export const getOpponents = (token) => async (dispatch) => {
     }
 } 
 
-export const createGame = game => async (dispatch) => {
+export const createGame = (game, token) => async (dispatch) => {
     try {
-        const resp = await axios.post('http://127.0.0.1:8000/api/partida', game);
+        const resp = await axios.post('Match/', game, { headers: { Authorization: `Bearer ${token}`}});
         dispatch(postGame(resp.data))
         dispatch(openToast({open: true, status: 'success', message:"Partida criada com sucesso"}));
 

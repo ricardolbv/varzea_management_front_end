@@ -42,29 +42,28 @@ export const FormNewGame = (props) => {
 
     const onSubmit = () => {
         const game = montaBody();
-        props.onCreateGame(game);
+        props.onCreateGame(game, token);
         setLocal('');
         setOpponent(opponent.value = '');
     }
 
     const montaBody = () => {
         const resp = {
-            idTime1 : props.captain.time.id,
-            idTime2: opponent.value,
-            modalidade :'',
-            dia : '',
+            homeId : props.team.id,
+            visitorId: opponent.value,
+            modality :'',
+            date : '',
             local : local,
-            aceite: 'Aguardando'
         }
 
 
         Object.entries(modalidade).map(entry => {
             if (entry[1])
-                resp.modalidade = entry[0];
+                resp.modality = entry[0];
         });
         Object.entries(dia).map(entry => {
             if (entry[1])
-                resp.dia = entry[0];
+                resp.date = entry[0];
         });
 
         return resp;
@@ -194,13 +193,13 @@ export const FormNewGame = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    captain: state.captain,
+    team: state.team,
     opponents: state.opponents,
 })
 
 const mapDispatchToProps = dispatch => ({
     onGetOpponents: token => dispatch(getOpponents(token)),
-    onCreateGame: game => dispatch(createGame(game)),
+    onCreateGame: (game, token) => dispatch(createGame(game, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormNewGame)
