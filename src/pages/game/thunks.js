@@ -21,7 +21,7 @@ export const getOpponents = (token) => async (dispatch) => {
 export const createGame = (game, token) => async (dispatch) => {
     try {
         const resp = await axios.post('Match/', game, { headers: { Authorization: `Bearer ${token}`}});
-        dispatch(postGame(resp.data))
+        dispatch(postGame(resp.data.data))
         dispatch(openToast({open: true, status: 'success', message:"Partida criada com sucesso"}));
 
     } catch (error) {
@@ -29,21 +29,20 @@ export const createGame = (game, token) => async (dispatch) => {
     }
 }
 
-export const retrieveGames = id => async (dispatch) => {
+export const retrieveGames = token => async (dispatch) => {
     try {
-        const resp = await axios.get('http://127.0.0.1:8000/api/time/'+id);
-        dispatch(getGames(resp.data.partidas))
+        const resp = await axios.get('Match/GetAll', { headers: { Authorization: `Bearer ${token}`}});
+        dispatch(getGames(resp.data.data))
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao carregar partidas de equipe "}));
     }
 }
 
-export const updateGameState = (id, newState) => async (dispatch) => {
+export const updateGameState = (token, newState) => async (dispatch) => {
     try {
-        const resp = await axios.put('http://127.0.0.1:8000/api/partida/update/'+id, newState);
-        console.log(resp.data)
-        dispatch(updateGame(resp.data))
+        const resp = await axios.put('Match/', newState, { headers: { Authorization: `Bearer ${token}`}});
+        dispatch(updateGame(resp.data.data));
         dispatch(openToast({open: true, status: 'success', message:"Partida respondida com sucesso!"}));
 
     } catch (error) {

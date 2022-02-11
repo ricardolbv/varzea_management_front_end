@@ -12,34 +12,25 @@ import Box from '@material-ui/core/Box'
 import { Button } from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
-
-import { retrieveGames, getOpponents } from '../game/thunks';
+import { useToken } from '../../auth/useToken';
+ 
+import { retrieveGames } from '../game/thunks';
 import ChallengeSelect from './ChallengeSelect';
 
+import { MatchStatus } from './Constants';
+
 const MyGame = (props) => {
-    return <>{props.estado}</>;
+    return <>{ MatchStatus[props.estado] }</>;
 }
 
 
 export const GamesTable = (props) => {
     const history = useHistory();
+    const [token, setToken] = useToken();
 
     useEffect(() => {
-        props.onGetOpponents(props.captain.time.id);
-        props.onGetGames(props.captain.time.id);
+        props.onGetGames(token);
     }, [])
-
-    const getAdversario = (id) => {
-        var resp = '';
-
-        props.oponnents.map(item => {
-            if (item.id === id){
-                resp = item
-            }
-        })
-
-        return resp.nome;
-    }
 
     return (
         <TableContainer>
@@ -62,18 +53,18 @@ export const GamesTable = (props) => {
                     </Box>
                 </TableCell> :
                 props.games.map((row) => (
-                    <TableRow style={{ backgroundColor: row.id_mando !== props.captain.time.id ? '#E5E5E5': 'white' }}>
-                        <TableCell align='center'> {props.captain.time.id === row.times[0]? getAdversario(row.times[1]) :getAdversario(row.times[0])} </TableCell>
-                        <TableCell align='center'> {row.dia} </TableCell>
+                    <TableRow style={{ backgroundColor: row.homeId !== props.team.id ? '#E5E5E5': 'white' }}>
+                        <TableCell align='center'> {props.team.id === row.teams[0].id ? row.teams[1].name : row.teams[0].name} </TableCell>
+                        <TableCell align='center'> {row.date} </TableCell>
                         <TableCell align='center'> {row.local} </TableCell>
-                        <TableCell align='center'> {row.id_mando === props.captain.time.id ? <MyGame estado={row.aceite}/> : <ChallengeSelect id_game={row.id} estado={row.aceite}/>} </TableCell>
+                        <TableCell align='center'> {row.homeId === props.team.id ? <MyGame estado={row.status}/> : <ChallengeSelect id_game={row.id} estado={row.status}/>} </TableCell>
                         <TableCell align='center'>
-                           {row.aceite === 'Aceito' ?
+                           {row.status === 1 ?
                            <Button variant='contained' onClick={() => history.push(`/home/results/summary/${row.id}`)}> Sumula </Button> :
                            <></>
                            }
                        </TableCell>
-                       <TableCell align='center'> {row.resultado}</TableCell>
+                       <TableCell align='center'> {row.winner}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>
@@ -84,13 +75,11 @@ export const GamesTable = (props) => {
 
 const mapStateToProps = (state) => ({
     games: state.games,
-    captain: state.captain,
-    oponnents: state.opponents,
+    team: state.team,
 })
 
 const mapDispatchToProps = dispatch => ({
-    onGetGames: id => dispatch(retrieveGames(id)),
-    onGetOpponents: id => dispatch(getOpponents(id)),
+    onGetGames: token => dispatch(retrieveGames(token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamesTable)
