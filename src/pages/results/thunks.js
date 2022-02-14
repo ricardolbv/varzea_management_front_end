@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../util/AxiosConfig';
 import {
     getSummary,
     updateSummary,
@@ -39,20 +39,20 @@ export const updateSumula = (fields, id_sumula) => async (dispatch) => {
     }
 }
 
-export const loadPlayersAway = (id_time) => async (dispatch) => {
+export const loadPlayersAway = (id_time, token) => async (dispatch) => {
     try {
-        const resp = await axios.get('http://127.0.0.1:8000/api/time/'+id_time);
-        dispatch(getPlayersAway(resp.data.jogadores));
+        const resp = await axios.get('Team/'+id_time, { headers: { Authorization: `Bearer ${token}`}});
+        dispatch(getPlayersAway(resp.data.data.players));
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao carregar Jogadores visitantes "+ error}));
     }
 } 
 
-export const loadPlayersHome = (id_time) => async (dispatch) => {
+export const loadPlayersHome = (id_time, token) => async (dispatch) => {
     try {
-        const resp = await axios.get('http://127.0.0.1:8000/api/time/'+id_time);
-        dispatch(getPlayersHome(resp.data.jogadores));
+        const resp = await axios.get('Team/'+id_time, { headers: { Authorization: `Bearer ${token}`}});
+        dispatch(getPlayersHome(resp.data.data.players));
 
     } catch (error) {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao carregar Jogadores mandantes "+ error}));

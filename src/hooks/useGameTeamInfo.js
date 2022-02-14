@@ -4,13 +4,13 @@ export default function useGameTeamInfo(teamOne, teamTwo, match){
     var home  = '';
     var away = '';
    
-    if (teamOne === match.id_mando){
-        home = teamOne;
-        away = teamTwo;
+    if (teamOne === match.homeId){
+        home = teamOne.id;
+        away = teamTwo.id;
     }
     else {
-        home = teamTwo;
-        away = teamOne;
+        home = teamTwo.id;
+        away = teamOne.id;
     }
 
     return [home, away];

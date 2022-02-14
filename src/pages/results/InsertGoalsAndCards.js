@@ -5,14 +5,16 @@ import { TextField, Grid, Box, Typography, Button, MenuItem } from '@material-ui
 import useTeam from '../../hooks/useTeam';
 import useGameTeamInfo from '../../hooks/useGameTeamInfo';
 import { loadPlayersAway, loadPlayersHome } from './thunks'
+import { useToken } from '../../auth/useToken';
 
 
 export const InsertGoalsAndCards = (props) => {
-    const [homeId, awayId] = useGameTeamInfo(props.game.times[0], props.game.times[1], props.game)
+    const [homeId, awayId] = useGameTeamInfo(props.game.teams[0], props.game.teams[1], props.game);
+    const [token, setToken] = useToken();
     
     useEffect(() => {
-        props.onGetPlayersAway(awayId);
-        props.onGetPlayersHome(homeId);
+        props.onGetPlayersAway(awayId, token);
+        props.onGetPlayersHome(homeId, token);
     }, [])
 
     return (
@@ -30,7 +32,7 @@ export const InsertGoalsAndCards = (props) => {
                                     <TextField type='select' label='Autor do gol' select fullWidth variant="outlined" name='homeGoalAuthor'
                                                id='homeGoalAuthor' onChange={props.onChangeSelectHomeGoalAuthor} value={props.home.homeGoalAuthor}>
                                     {props.homePlayers.map(pl =>
-                                        <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
+                                        <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.name}</MenuItem>
                                     )}
                                     </TextField>
                                 </Grid>
@@ -56,7 +58,7 @@ export const InsertGoalsAndCards = (props) => {
                                     <TextField label='Cartão' select fullWidth variant="outlined" id="homeCardPlayer"
                                                name="homeCardPlayer" onChange={props.onChangeSelectHomeCard} value={props.home.homeCardPlayer}>
                                         {props.homePlayers.map(pl =>
-                                            <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
+                                            <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.name}</MenuItem>
                                         )}
                                     </TextField>
                                 </Grid>
@@ -84,7 +86,7 @@ export const InsertGoalsAndCards = (props) => {
                                     <TextField type='select' label='Autor do gol' select fullWidth variant="outlined" name='awayGoalAuthor'
                                                id='awayGoalAuthor' onChange={props.onChangeSelectAwayGoalAuthor} value={props.away.awayGoalAuthor}>
                                     {props.awayPlayers.map(pl =>
-                                        <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
+                                        <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.name}</MenuItem>
                                     )}
                                     </TextField>
                                 </Grid>
@@ -110,7 +112,7 @@ export const InsertGoalsAndCards = (props) => {
                                     <TextField label='Cartão' select fullWidth variant="outlined" id="awayCardPlayer"
                                                name="awayCardPlayer" onChange={props.onChangeSelectAwayCard} value={props.away.awayCardPlayer}>
                                         {props.awayPlayers.map(pl =>
-                                            <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.nome}</MenuItem>
+                                            <MenuItem key={pl.id} name={pl.id} value={pl.id}> {pl.name}</MenuItem>
                                         )}
                                     </TextField>
                                 </Grid>
@@ -132,12 +134,11 @@ const mapStateToProps = (state) => ({
     team: state.team,
     awayPlayers: state.awayPlayers,
     homePlayers: state.homePlayers,
-    opponents: state.opponents,
 })
 
 const mapDispatchToProps = dispatch => ({
-    onGetPlayersAway: id => dispatch(loadPlayersAway(id)),
-    onGetPlayersHome: id => dispatch(loadPlayersHome(id)),
+    onGetPlayersAway: (id, token) => dispatch(loadPlayersAway(id, token)),
+    onGetPlayersHome: (id, token) => dispatch(loadPlayersHome(id, token)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InsertGoalsAndCards)

@@ -12,16 +12,7 @@ import { useParams } from 'react-router';
 export const GoalsFromGame = (props) => {
     let { id } = useParams();
 
-    const idOponente =  props.team.id === props.game.times[0] ? props.game.times[1] : props.game.times[0];
-    const [timeOponente, ] = props.opponents.filter(item => item.id === idOponente);
-    //Todo: Fazer uma hook que contabiliza gols adversarios e meus gols.
-    var goalsHome =  useMatchGoals(props.goalsHomeSummary)
-    var goalsAway =  useMatchGoals(props.goalsAwaySummary)
-
-    useEffect(() => {
-        props.onGetOpponents(props.team.id);
-        props.onLoadGoalsFromMatch(id)
-    }, [])
+    const opponent =  props.team.id === props.game.teams[0].id ? props.game.teams[1] : props.game.teams[0];
 
     return (
         <Grid container direction='row' spacing={1}>
@@ -30,26 +21,26 @@ export const GoalsFromGame = (props) => {
                 <Box display='flex' justifyContent='center'>
                     <Grid container spacing={0} direction='row'>
                         <Grid item xs={5}>
-                            <Typography variant='h6' align='center' >  {props.summaryPerson === 'Mandante' ? props.team.nome  : timeOponente.nome}</Typography>
+                            <Typography variant='h6' align='center' >  {props.summaryPerson === 'Mandante' ? props.team.name  : opponent.name}</Typography>
                         </Grid>
                         <Grid item xs={2}>
                             <Typography variant='h6'  align='center'>  -  </Typography>
                         </Grid>
                         <Grid item xs={5}>
-                            <Typography variant='h6'  align='center'>  {props.summaryPerson === 'Visitante'? props.team.nome : timeOponente.nome}</Typography>
+                            <Typography variant='h6'  align='center'>  {props.summaryPerson === 'Visitante'? props.team.name : opponent.name}</Typography>
                         </Grid>
                     </Grid>
                 </Box>
                 <Box display='flex' justifyContent='center'>
                 <Grid container spacing={0} direction='row'>
                         <Grid item xs={5}>
-                            <Typography variant='h1' align='center' >  {goalsHome}</Typography>
+                            <Typography variant='h1' align='center' >  {props.game.homeGoals}</Typography>
                         </Grid>
                         <Grid item xs={2}>
                             <Typography variant='h1'  align='center'>  x  </Typography>
                         </Grid>
                         <Grid item xs={5}>
-                            <Typography variant='h1'  align='center'>  {goalsAway}</Typography>
+                            <Typography variant='h1'  align='center'>  {props.game.awayGoals}</Typography>
                         </Grid>
                     </Grid>
                     
@@ -62,15 +53,6 @@ export const GoalsFromGame = (props) => {
 
 const mapStateToProps = (state) => ({
     team: state.team,
-    opponents: state.opponents,
-    summary: state.summary,
-    goalsAwaySummary: state.goalsAwaySummary,
-    goalsHomeSummary: state.goalsHomeSummary,
 })
 
-const mapDispatchToProps = dispatch => ({
-    onGetOpponents: id => dispatch(getOpponents(id)),
-    onLoadGoalsFromMatch: id => dispatch(loadGoalsFromMatch(id)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(GoalsFromGame)
+export default connect(mapStateToProps, null)(GoalsFromGame)

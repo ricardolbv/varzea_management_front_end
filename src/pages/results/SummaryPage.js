@@ -16,16 +16,12 @@ import useSummary from '../../hooks/useSummary';
 import { loadSumula } from './thunks'
 
 import { useParams } from 'react-router';
+import { MatchStatus } from './Constants';
 
 const SummaryPage = (props) => {
     let { id } = useParams();
     var [_game, ] = props.games.filter(x => parseInt(x.id) === parseInt(id))
     const summaryPerson = useSummary(props.team.id, _game);
-
-    
-    useEffect(() => {
-        props.onGetSummary(id);
-    }, [])
 
     return (
         <Box display='flex' justifyContent='center' p={2} style={{maxHeight:'80%'}}>
@@ -42,11 +38,11 @@ const SummaryPage = (props) => {
             <Grid xs={1}/>
                 <Grid xs={10} item>
                     <GoalsFromGame game={_game} summaryPerson={summaryPerson}/>
-                    {summaryPerson === 'Mandante' && props.summary.status !== 'aceito'? 
+                    {summaryPerson === 'Mandante' && MatchStatus[_game.status] === MatchStatus[1]? 
                     <>
                     <ManageInsertGoalsAndCards game={_game}/>
                     <SubmitSummary />
-                    </> : <InfoSummary status={props.summary.status}/>}
+                    </> : <InfoSummary status={_game.status}/>}
                 </Grid>
             <Grid xs={1}/>
             </Grid>
@@ -58,11 +54,7 @@ const SummaryPage = (props) => {
 const mapStateToProps = (state) => ({
     games: state.games,
     team: state.team,
-    summary: state.summary,
 })
 
-const mapDispatchToProps = dispatch => ({
-    onGetSummary: id => dispatch(loadSumula(id)),
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(SummaryPage);
+export default connect(mapStateToProps, null)(SummaryPage);

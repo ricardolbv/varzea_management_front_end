@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Grid, Typography, Button, Box, Divider } from '@material-ui/core'
 import ResponseComponent from './ResponseComponent'
 import { connect } from 'react-redux';
+import { MatchStatus } from './Constants';
 
 import ShowGoals from './ShowGoals'
 
@@ -10,13 +11,13 @@ import ShowGoals from './ShowGoals'
 function InfoSummary(props) {
     const getMessage = () => {
         switch (props.status){
-            case 'criado':
+            case 1:
                 return 'Aguardando envio de sumula por mandante!'
 
-            case 'aceito':
+            case 4:
                 return 'Sumula consolidada por ambas as partes. Resultado acima!'
 
-            case 'enviado':
+            case 3:
                 return 'Por favor, responda a sumula enviada por mandante.'
 
             default:
@@ -29,7 +30,7 @@ function InfoSummary(props) {
         <Grid container spacing={1}>
            <Grid item xs={1}/>
            <Grid item xs={10}>
-               <Typography variant='h4'> Status: {props.status} </Typography>
+               <Typography variant='h4'> Status: {MatchStatus[props.status]} </Typography>
                <Typography variant='body1'> {getMessage()} </Typography>
                {props.status === 'enviado' ? <ResponseComponent /> : <></>}
            </Grid>
