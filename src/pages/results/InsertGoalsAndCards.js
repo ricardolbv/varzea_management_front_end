@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { TextField, Grid, Box, Typography, Button, MenuItem } from '@material-ui/core'
 
-import useTeam from '../../hooks/useTeam';
 import useGameTeamInfo from '../../hooks/useGameTeamInfo';
 import { loadPlayersAway, loadPlayersHome } from './thunks'
 import { useToken } from '../../auth/useToken';
@@ -50,8 +49,8 @@ export const InsertGoalsAndCards = (props) => {
                                 <Grid item xs={3}>
                                     <TextField variant="outlined" id='homeCardType' select fullWidth name="homeCardType"
                                                onChange={props.onChangeSelectHomeCard} value={props.home.homeCardType}>
-                                        <MenuItem key={1} name="vermelho" value="Vermelho"> Vermelho </MenuItem>
-                                        <MenuItem key={2} name="amarelo" value="Amarelo"> Amarelo </MenuItem>
+                                        <MenuItem key={1} name="vermelho" value={1}> Vermelho </MenuItem>
+                                        <MenuItem key={2} name="amarelo" value={0}> Amarelo </MenuItem>
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={9}>
@@ -104,8 +103,8 @@ export const InsertGoalsAndCards = (props) => {
                                 <Grid item xs={3}>
                                     <TextField variant="outlined"  select fullWidth id="awayCardType" name="awayCardType"
                                                onChange={props.onChangeSelectAwayCard} value={props.away.awayCardType}>
-                                        <MenuItem key={1} name="vermelho" value="Vermelho"> Vermelho </MenuItem>
-                                        <MenuItem key={2} name="amarelo" value="Amarelo"> Amarelo </MenuItem>
+                                        <MenuItem key={1} name="vermelho" value={1}> Vermelho </MenuItem>
+                                        <MenuItem key={2} name="amarelo" value={0}> Amarelo </MenuItem>
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={9}>
@@ -131,7 +130,6 @@ export const InsertGoalsAndCards = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    team: state.team,
     awayPlayers: state.awayPlayers,
     homePlayers: state.homePlayers,
 })

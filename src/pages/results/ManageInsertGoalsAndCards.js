@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 
 import InsertGoalsAndCards from './InsertGoalsAndCards';
 import { createGoal, createCard } from './thunks';
+import { useToken } from '../../auth/useToken';
+import { useParams } from   'react-router';
+import useGameTeamInfo from '../../hooks/useGameTeamInfo';
 
 function ManageInsertGoalsAndCards(props) {
+    const [homeId, awayId] = useGameTeamInfo(props.game.teams[0], props.game.teams[1], props.game);
+    let { id } = useParams();
+    const [token, setToken] = useToken(); 
+
     const [away, setAway] = useState({
         awayGoalAuthor : "",
         awayGoal: 0,
@@ -28,9 +35,11 @@ function ManageInsertGoalsAndCards(props) {
         const body = {
             qtd : away.awayGoal,
             autor: away.awayGoalAuthor,
-            time: 'Away'
+            time: 1,
+            matchId: parseInt(id),
+            type: 'away'
         }
-        props.onClickGoal(props.summary.id, body)
+        props.onClickGoal(body, token)
         resetAway('goal');
     }
 
@@ -38,9 +47,11 @@ function ManageInsertGoalsAndCards(props) {
         const body = {
             tipo : away.awayCardType,
             jogador: away.awayCardPlayer,
-            time: 'Away'
+            time: awayId,
+            status: 1,
+            type: 'away'
         }
-        props.onClickCard(props.summary.id, body)
+        props.onClickCard(body, token)
         resetAway('card');
     }
 
@@ -75,9 +86,11 @@ function ManageInsertGoalsAndCards(props) {
         const body = {
             qtd : home.homeGoal,
             autor: home.homeGoalAuthor,
-            time: 'Home'
+            time: 0,
+            matchId: parseInt(id),
+            type: 'home'
         }
-        props.onClickGoal(props.summary.id, body)
+        props.onClickGoal(body, token)
         resetHome('goal');
     }
 
@@ -85,9 +98,11 @@ function ManageInsertGoalsAndCards(props) {
         const body = {
             tipo : home.homeCardType,
             jogador: home.homeCardPlayer,
-            time: 'Home'
+            time: homeId,
+            status: 0,
+            type: 'home'
         }
-        props.onClickCard(props.summary.id, body)
+        props.onClickCard(body, token)
         resetHome('card');
     }
 

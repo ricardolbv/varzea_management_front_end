@@ -41,7 +41,7 @@ const SummaryPage = (props) => {
                     {summaryPerson === 'Mandante' && MatchStatus[_game.status] === MatchStatus[1]? 
                     <>
                     <ManageInsertGoalsAndCards game={_game}/>
-                    <SubmitSummary />
+                    <SubmitSummary game={_game}/>
                     </> : <InfoSummary status={_game.status}/>}
                 </Grid>
             <Grid xs={1}/>

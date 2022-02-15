@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Box, Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom';
-
 import { updateSumula } from './thunks'
+import { useToken } from '../../auth/useToken';
 
 export const SubmitSummary = (props) => {
-    const [fields, setFields] = useState({ status: 'enviado' })
+    const [token, setToken] = useToken();
     const history = useHistory();
 
     const handleSubmit = () => {
-        props.onUpdateSummary(fields, props.summary.id)
+        props.onUpdateSummary({id: props.game.id, status: 3}, token)
         history.push('/home/results')
     }
 
@@ -21,12 +21,8 @@ export const SubmitSummary = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    summary: state.summary
-})
-
 const mapDispatchToProps = dispatch => ({
-    onUpdateSummary: (fields, id) => dispatch(updateSumula(fields, id))
+    onUpdateSummary: (fields, token) => dispatch(updateSumula(fields, token))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubmitSummary)
+export default connect(null, mapDispatchToProps)(SubmitSummary)

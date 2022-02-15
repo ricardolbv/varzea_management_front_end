@@ -28,9 +28,10 @@ export const loadSumula = (id_partida) => async (dispatch) => {
     }
 } 
 
-export const updateSumula = (fields, id_sumula) => async (dispatch) => {
+export const updateSumula = (fields, token) => async (dispatch) => {
     try {
-        const resp = await axios.put('http://127.0.0.1:8000/api/sumula/update/'+id_sumula, fields);
+        console.log(fields)
+        const resp = await axios.put('Match/', fields, { headers: { Authorization: `Bearer ${token}`}});
         dispatch(openToast({open: true, status: 'success', message:"Sumula enviada com sucesso!"}));
         dispatch(updateSummary(resp.data));
 
@@ -59,12 +60,12 @@ export const loadPlayersHome = (id_time, token) => async (dispatch) => {
     }
 }
 
-export const createGoal = (id_sumula, gol) => async (dispatch) => {
+export const createGoal = (gol, token) => async (dispatch) => {
     try {
-        var body = { quantidade: parseInt(gol.qtd), autor: gol.autor, golPara: gol.time }
-        const resp = await axios.post('http://127.0.0.1:8000/api/gol/create/sumula/'+id_sumula, body);
+        var body = { quantity: parseInt(gol.qtd), playerId: gol.autor, goalStatus: gol.time, matchId: gol.matchId }
+        const resp = await axios.post('Goal/', body, { headers: { Authorization: `Bearer ${token}`}});
         
-        gol.time === 'Home'? dispatch(createGoalHome(body)) : dispatch(createGoalAway(body));
+        gol.type === 'home'? dispatch(createGoalHome(body)) : dispatch(createGoalAway(body));
 
         dispatch(openToast({open: true, status: 'success', message:"Gol registrado com sucesso!"}));
 
@@ -73,11 +74,12 @@ export const createGoal = (id_sumula, gol) => async (dispatch) => {
     }
 }
 
-export const createCard = (id_sumula, cartao) => async (dispatch) => {
+export const createCard = (cartao, token) => async (dispatch) => {
     try {
-        const resp = await axios.post('http://127.0.0.1:8000/api/cartao/create/sumula/'+id_sumula, { tipo: cartao.tipo, jogador: cartao.jogador, time: cartao.time });
+        const resp = await axios.post('Card/', { cardType: cartao.tipo, playerId: cartao.jogador, matchId: cartao.time, cardStatus: cartao.status },
+                                     { headers: { Authorization: `Bearer ${token}`}});
         
-        cartao.time === 'Home'? dispatch(createCardHome(cartao)) : dispatch(createCardAway(cartao));
+        cartao.type === 'home'? dispatch(createCardHome(cartao)) : dispatch(createCardAway(cartao));
 
         dispatch(openToast({open: true, status: 'success', message:"Cartão registrado com sucesso!"}));
 

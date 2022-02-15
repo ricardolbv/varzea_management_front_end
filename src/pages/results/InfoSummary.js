@@ -7,7 +7,6 @@ import { MatchStatus } from './Constants';
 import ShowGoals from './ShowGoals'
 
 
-
 function InfoSummary(props) {
     const getMessage = () => {
         switch (props.status){
