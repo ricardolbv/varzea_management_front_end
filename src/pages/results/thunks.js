@@ -76,7 +76,7 @@ export const createGoal = (gol, token) => async (dispatch) => {
 
 export const createCard = (cartao, token) => async (dispatch) => {
     try {
-        const resp = await axios.post('Card/', { cardType: cartao.tipo, playerId: cartao.jogador, matchId: cartao.time, cardStatus: cartao.status },
+        const resp = await axios.post('Card/', { cardType: cartao.tipo, playerId: cartao.jogador, matchId: cartao.matchId, cardStatus: cartao.status },
                                      { headers: { Authorization: `Bearer ${token}`}});
         
         cartao.type === 'home'? dispatch(createCardHome(cartao)) : dispatch(createCardAway(cartao));

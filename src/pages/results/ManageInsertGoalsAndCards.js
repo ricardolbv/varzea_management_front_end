@@ -49,7 +49,8 @@ function ManageInsertGoalsAndCards(props) {
             jogador: away.awayCardPlayer,
             time: awayId,
             status: 1,
-            type: 'away'
+            type: 'away',
+            matchId: parseInt(id),
         }
         props.onClickCard(body, token)
         resetAway('card');
@@ -100,7 +101,8 @@ function ManageInsertGoalsAndCards(props) {
             jogador: home.homeCardPlayer,
             time: homeId,
             status: 0,
-            type: 'home'
+            type: 'home',
+            matchId: parseInt(id),
         }
         props.onClickCard(body, token)
         resetHome('card');

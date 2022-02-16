@@ -59,7 +59,7 @@ export const GamesTable = (props) => {
                         <TableCell align='center'> {row.local} </TableCell>
                         <TableCell align='center'> {row.homeId === props.team.id ? <MyGame estado={row.status}/> : <ChallengeSelect id_game={row.id} estado={row.status}/>} </TableCell>
                         <TableCell align='center'>
-                           {row.status === 1 ?
+                           {row.status === 1 || row.status === 3 ?
                            <Button variant='contained' onClick={() => history.push(`/home/results/summary/${row.id}`)}> Sumula </Button> :
                            <></>
                            }

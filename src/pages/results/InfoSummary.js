@@ -8,6 +8,11 @@ import ShowGoals from './ShowGoals'
 
 
 function InfoSummary(props) {
+    const awayGoals = props.game.goals.filter(x => x.goalStatus === 1);
+    const homeGoals = props.game.goals.filter(x => x.goalStatus === 0);
+    const awayCards = props.game.cards.filter(x => x.cardStatus === 1);
+    const homeCards = props.game.cards.filter(x => x.cardStatus === 0);
+
     const getMessage = () => {
         switch (props.status){
             case 1:
@@ -17,7 +22,7 @@ function InfoSummary(props) {
                 return 'Sumula consolidada por ambas as partes. Resultado acima!'
 
             case 3:
-                return 'Por favor, responda a sumula enviada por mandante.'
+                return 'Aguardando envio de resposta de sumula.'
 
             default:
                 return ''
@@ -31,30 +36,30 @@ function InfoSummary(props) {
            <Grid item xs={10}>
                <Typography variant='h4'> Status: {MatchStatus[props.status]} </Typography>
                <Typography variant='body1'> {getMessage()} </Typography>
-               {props.status === 'enviado' ? <ResponseComponent /> : <></>}
+               {props.status === 3 && props.summaryPerson === 'Visitante'? <ResponseComponent /> : <></>}
            </Grid>
            <Grid item xs={1}/>
 
-           {props.status === 'aceito'? 
+           {props.status === 3? 
                 <Grid container spacing={1} direction='row'>
                 <Grid item xs={3}>
                     <Box display='flex' justifyContent='center' paddingTop={3}>
-                        <ShowGoals tipo='cartão' lista={props.cardsHomeSummary}/>
+                        <ShowGoals tipo='cartão' lista={homeCards}/>
                     </Box>
                 </Grid>
                 <Grid item xs={3}>
                     <Box display='flex' justifyContent='center' paddingTop={3}>
-                        <ShowGoals tipo='gol' lista={props.goalsAwaySummary}/>
+                        <ShowGoals tipo='gol' lista={homeGoals}/>
                     </Box>
                 </Grid>
                 <Grid item xs={3}>
                     <Box display='flex' justifyContent='center' paddingTop={3}>
-                        <ShowGoals tipo='gol' lista={props.goalsAwaySummary}/>
+                        <ShowGoals tipo='gol' lista={awayGoals}/>
                     </Box>
                 </Grid>
                 <Grid item xs={3}>
                     <Box display='flex' justifyContent='center' paddingTop={3}>
-                        <ShowGoals tipo='cartão' lista={props.cardsAwaySummary}/>
+                        <ShowGoals tipo='cartão' lista={awayCards}/>
                     </Box>
                 </Grid>
            </Grid> : <></>

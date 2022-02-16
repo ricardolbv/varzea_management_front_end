@@ -22,7 +22,7 @@ function GoalList (props){
                         <SportsSoccerIcon />
                     </Grid>
                     <Grid item xs={9}>
-                     <Typography>{gol.quantidade} - {gol.autor}</Typography>
+                     <Typography>{gol.quantity} - {gol.player.name}</Typography>
                     </Grid>
                 </Grid>
             </>
@@ -42,7 +42,7 @@ function CardList (props){
                         <AssignmentLateIcon />
                     </Grid>
                     <Grid item xs={9}>
-                     <Typography>{cartao.tipo} - {cartao.jogador}</Typography>
+                     <Typography>{cartao.cardType == 0 ? "Ama" : "Ver"} - {cartao.player.name}</Typography>
                     </Grid>
                 </Grid>
             </>

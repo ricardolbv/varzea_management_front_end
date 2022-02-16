@@ -42,7 +42,7 @@ const SummaryPage = (props) => {
                     <>
                     <ManageInsertGoalsAndCards game={_game}/>
                     <SubmitSummary game={_game}/>
-                    </> : <InfoSummary status={_game.status}/>}
+                    </> : <InfoSummary status={_game.status} summaryPerson={summaryPerson} game={_game}/>}
                 </Grid>
             <Grid xs={1}/>
             </Grid>
