@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import { Grid, Typography, Button, Box } from '@material-ui/core';
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom';
+import { useToken } from '../../auth/useToken';
 
 import { updateSumula } from './thunks'
 
 function ResponseComponent (props){
     const history = useHistory();
+    const [token, setToken] = useToken();
+
     const handleCancel = () => {
-        props.onUpdateSummary({ status: 'recusado' }, props.summary.id)
+        props.onUpdateSummary({ id: props.gameId, status: 2 }, token)
         history.push('/home/results')
     }
 
     const handleAccept = () => {
-        props.onUpdateSummary({ status: 'aceito' }, props.summary.id)
+        props.onUpdateSummary({ id: props.gameId, status: 4 }, token)
         history.push('/home/results')
     }
 
@@ -31,12 +34,9 @@ function ResponseComponent (props){
     )
 }
 
-const mapStateToProps = (state) => ({
-    summary: state.summary
-})
 
 const mapDispatchToProps = dispatch => ({
-    onUpdateSummary: (fields, id) => dispatch(updateSumula(fields, id))
+    onUpdateSummary: (fields, token) => dispatch(updateSumula(fields, token))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResponseComponent)
+export default connect(null, mapDispatchToProps)(ResponseComponent)

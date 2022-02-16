@@ -36,7 +36,7 @@ function InfoSummary(props) {
            <Grid item xs={10}>
                <Typography variant='h4'> Status: {MatchStatus[props.status]} </Typography>
                <Typography variant='body1'> {getMessage()} </Typography>
-               {props.status === 3 && props.summaryPerson === 'Visitante'? <ResponseComponent /> : <></>}
+               {props.status === 3 && props.summaryPerson === 'Visitante'? <ResponseComponent gameId={props.game.id} /> : <></>}
            </Grid>
            <Grid item xs={1}/>
 
