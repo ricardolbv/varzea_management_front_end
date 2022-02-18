@@ -88,10 +88,10 @@ export const TimeFields = (props) => {
                     <Typography variant='body1' textAlign='center'> Artilheiro: xxxx </Typography>
                 </Box>
                     <Box p={1} display='flex' justifyContent='center'>
-                        <PieStat />
+                        <PieStat vitorias={props.team.victories} empates={props.team.draws} derrotas={props.team.defeats}/>
                     </Box>
                     <Box display='flex' justifyContent='center'>
-                        <Typography variant='body2' textAlign='center'>V {dados.vitorias} E {dados.empates} D {dados.derrotas} </Typography>
+                        <Typography variant='body2' textAlign='center'>V {props.team.victories} E {props.team.draws} D {props.team.defeats} </Typography>
                     </Box>
                 </Grid>
             </Grid>  

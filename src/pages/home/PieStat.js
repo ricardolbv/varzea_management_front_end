@@ -3,12 +3,12 @@ import React from 'react';
 import { PieChart, Pie, Cell, LabelList} from 'recharts';
   
   
-const PieStat = () => {
+const PieStat = (props) => {
   
 const data = [
-  {name: 'Vitórias', qtd: 5},
-  {name: 'Empates', qtd: 4},
-  {name: 'Derrotas', qtd: 2},
+  {name: 'Vitórias', qtd: props.vitorias},
+  {name: 'Empates', qtd: props.empates},
+  {name: 'Derrotas', qtd: props.derrotas},
 ];
 
 return (
