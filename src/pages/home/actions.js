@@ -21,3 +21,9 @@ export const login = time => ({
     type: LOGIN,
     payload: time
 })
+
+export const GET_PLAYMAKER = "GET_PLAYMAKER";
+export const getPlaymaker = playmaker => ({
+    type: GET_PLAYMAKER,
+    payload: playmaker
+})

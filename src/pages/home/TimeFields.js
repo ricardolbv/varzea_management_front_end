@@ -10,13 +10,8 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import PieStat from './PieStat';
-import { getTeam, updateTeam } from './thunks';
-
-const dados = {
-    vitorias: 5,
-    empates: 4,
-    derrotas: 2,
-}
+import Playmaker from './Playmaker';
+import { updateTeam,retrievePlaymaker } from './thunks';
 
 export const TimeFields = (props) => {
     return (
@@ -85,7 +80,7 @@ export const TimeFields = (props) => {
                     <Typography variant='h5' textAlign='center'> Estatísticas: </Typography>
                 </Box>
                 <Box display='flex' justifyContent='center'>
-                    <Typography variant='body1' textAlign='center'> Artilheiro: xxxx </Typography>
+                    <Playmaker />
                 </Box>
                     <Box p={1} display='flex' justifyContent='center'>
                         <PieStat vitorias={props.team.victories} empates={props.team.draws} derrotas={props.team.defeats}/>
@@ -101,12 +96,13 @@ export const TimeFields = (props) => {
 
 const mapStateToProps = (state) => ({
     team: state.team,
-    players: state.players
+    players: state.players,
+    playmaker: state.playmaker
 })
 
 const mapDispatchToProps = dispatch => ({
-    GetEquipe: () => dispatch(getTeam()),
     onUpdateEquipe: (equipe, id) => dispatch(updateTeam(equipe, id)),
+    onGetPlaymaker: token => dispatch(retrievePlaymaker(token))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeFields)

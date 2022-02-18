@@ -2,6 +2,7 @@ import axios from '../../util/AxiosConfig';
 import {
     updateTime,
     getTime,
+    getPlaymaker
 } from './actions';
 
 
@@ -34,3 +35,13 @@ export const getTeam = (token) => async (dispatch) => {
         dispatch(openToast({open: true, status: 'error', message:"Erro ao retornar equipe"+ error}));
     }
 } 
+
+export const retrievePlaymaker = (token) => async (dispatch) => {
+    try {
+        const resp = await axios.get('Player/Playmaker', { headers: { Authorization: `Bearer ${token}`}})
+        dispatch(getPlaymaker(resp.data.data));
+
+    } catch (error){
+        console.log(error)
+    }
+}

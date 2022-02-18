@@ -7,7 +7,7 @@ import { LOGOUT } from './pages/home/actions';
 import { players } from './pages/team/reducers'
 import { captain } from './pages/captain/reducers'
 import { toast } from './common/reducers'
-import { team } from './pages/home/reducers';
+import { team, playmaker } from './pages/home/reducers';
 import { opponents, games } from './pages/game/reducers';
 import { summary, awayPlayers, homePlayers, goalsAwaySummary, goalsHomeSummary, cardsAwaySummary, cardsHomeSummary } from './pages/results/reducers';
  
@@ -25,6 +25,7 @@ const reducers = {
     goalsHomeSummary,
     cardsAwaySummary,
     cardsHomeSummary,
+    playmaker
 }
 
 const appReducer = (state, action) => {
